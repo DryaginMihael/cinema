@@ -1,0 +1,22 @@
+.header-menu ul{
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+}
+.header-menu li{
+	padding: 20px 29px;
+	font-weight: bold;
+	text-decoration: none;
+	list-style: none;
+	border-bottom: solid 5px #8408cd;
+}
+.header-menu li:hover{
+	background:  #141414;	
+	border-bottom: none;
+	cursor: pointer;
+	
+}
+.header-menu li i{
+	color: #F6BB10;
+}

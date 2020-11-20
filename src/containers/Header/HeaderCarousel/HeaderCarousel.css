@@ -1,0 +1,43 @@
+.carousel {
+	position: relative;
+	border-bottom: solid 5px #8408cd;
+	
+}
+.carousel-contain {
+    width: 1000px;
+	margin: 40px auto;
+	overflow: hidden;
+}
+.carousel ul{
+	margin: 0;
+	padding: 0;
+	width: 2210px;
+	transition: transform .3s ease-in-out;
+}
+.carousel li{
+	margin: 0;
+	padding: 0;
+}
+.carousel li.film{
+	margin-right: 20px;
+	margin-bottom: 0px;
+	transform: none;
+	box-sizing: border-box;
+}
+.carousel button{
+	background: none;
+	border: none;
+	position: absolute;
+	outline: none;
+	color: #fff;
+	font-size: 30px;
+
+}
+.carousel button.prev{
+	left: 20px;
+	top: 100px;
+}
+.carousel button.next{
+	right: 20px;
+	top: 100px;
+}

@@ -1,0 +1,31 @@
+footer{
+
+}
+.footer-top{
+	padding: 20px;
+	display: flex;
+	justify-content: space-around;
+	background: #141414;
+}
+.footer-top ul {
+	padding: 0;
+	margin: 0;
+	color: #A8A4BA;
+}
+.footer-top li:hover{
+	color: #fff;
+	cursor: pointer;
+}
+.footer-bottom {
+	padding: 20px 0;
+	display: flex;
+	justify-content: space-around;
+}
+.footer-bottom .subscribe i{
+	margin-left: 10px;
+	color:#A8A4BA;
+}
+.footer-bottom .subscribe i:hover{
+	color: #fff;
+	cursor: pointer;
+}
