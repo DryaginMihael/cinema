@@ -1,0 +1,14 @@
+button{
+    border-radius: 5px;
+	padding: 10px;
+	outline: none;
+}
+
+.dark {
+    color: #fff;
+	background: linear-gradient(90deg, #8408cd 0%, #527eb3 100% );
+}
+.light{
+    color: #000;
+	background: #F6BB10;
+}

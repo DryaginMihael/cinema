@@ -4,37 +4,52 @@ import FilmItem from '../FilmItem/FilmItem'
 
 export default class FilmsList extends React.Component {
 
-    drawFilms(count, isLittleIcon) {
+    state = {
+        FilmsList: null,
+    }
 
-        const arr = []
-
-        let upgrade = {}
-
-        isLittleIcon
-            ? upgrade = {
-                filmStyle: { width: "150px" },
-                descStyle: { display: "none" },
-                previewStyle: { margin: "0" }
-            }
-            : upgrade = {
-                filmStyle: { width: "100%" },
-                descStyle: { display: "inline" },
-                previewStyle: { margin: "15px" }
-            }
-
-        for (let i = 0; i < count; i++) {
-            arr.push(<FilmItem key={i} upgrade={upgrade} />)
+    componentWillReceiveProps(nextProps) {
+        if (nextProps !== this.props) {
+            this.drawFilms(nextProps.isLittleIcon)
         }
+    }
 
-        return (
-            arr
-        )
+    componentDidMount() {
+        this.drawFilms(this.props.isLittleIcon)
+    }
+
+    async drawFilms(isLittleIcon) {
+
+        let response = await fetch('./films.json');
+
+        if (response.ok) {
+            const data = await response.json()
+            const films = data.movies
+
+            let arr = []
+            arr = Object.keys(films).map((filmNum) => {
+                const film = films[filmNum]
+                if (film.poster && filmNum <= this.props.count) {
+                    return (<FilmItem
+                        key={filmNum}
+                        name={film.title}
+                        desc={film.description}
+                        poster={film.poster}
+                        rate={film.rating_kinopoisk}
+                        isLittleIcon={isLittleIcon}
+                    />)
+                }
+            })
+            this.setState({ FilmsList: arr })
+        } else {
+            alert("Ошибка HTTP: " + response.status);
+        }
     }
 
     render() {
         return (
             <ul className="films-list">
-                {this.drawFilms(this.props.count, this.props.isLittleIcon)}
+                {this.state.FilmsList}
             </ul>
         )
     }

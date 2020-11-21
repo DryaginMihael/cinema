@@ -1,9 +1,14 @@
 import React from 'react'
 import './SettingSearch.css'
+import FilmItem from '../Films/FilmItem/FilmItem'
+import InputRange from '../../../components/UI/InputRange/InputRange';
 
 export default class SettingSearch extends React.Component {
 
     render() {
+
+        let arr_RU = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
+
         return (
             <section className="setting-search">
                 <form>
@@ -39,45 +44,59 @@ export default class SettingSearch extends React.Component {
                             <option>Жанр</option>
                         </select>
                     </div>
-                    <div className="range">
-                        <label for="kp"> Рейтинг КП</label><br />
-                        <input className="custom-range" type="range" min="0" max="10" value="7.5" id="kp" />
-                    </div>
-                    <div className="range">
-                        <label for="imbd"> Рейтинг IMDB</label><br />
-                        <input className="custom-range" type="range" min="0" max="10" value="7.5" id="imbd" />
-                    </div>
+
+                    <InputRange id={"kp"} >Рейтинг КП </InputRange>
+                    <InputRange id={"imdb"}>Рейтинг IMDB</InputRange>
+
                     <div className="alphabet">
                         По алфавиту
                             <ul>
-                            <li>A</li>
-                            <li>B</li>
-                            <li>C</li>
-                            <li>D</li>
-                            <li>E</li>
-                            <li>F</li>
-                            <li>G</li>
-                            <li>H</li>
-                            <li>L</li>
-                            <li>M</li>
-                            <li>N</li>
-                            <li>O</li>
-                            <li>P</li>
-                            <li>Q</li>
-                            <li>R</li>
-                            <li>S</li>
-                            <li>T</li>
-                            <li>U</li>
-                            <li>V</li>
-                            <li>W</li>
-                            <li>X</li>
-                            <li>Y</li>
-                            <li>Z</li>
+                            {arr_RU.map((char) => <li>{char}</li>)}
                         </ul>
                     </div>
                 </form>
 
-            </section>
+                <div className="new-films">
+                    <h2>Лучшее:</h2>
+                    <div className="films-new">
+                        <div className="film-new">
+                            <FilmItem
+                                name={"Бойцовский клуб"}
+                                poster={"//images.kinopoisk.cloud/posters/361.jpg"}
+                                rate={"9.6"}
+                                isLittleIcon={true}
+                            />
+                        </div>
+                        <div className="film-new">
+                            <FilmItem
+                                name={"Джентельмены"}
+                                poster={"//images.kinopoisk.cloud/posters/1143242.jpg"}
+                                rate={"9.8"}
+                                isLittleIcon={true}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <ul className="FAQ">
+                    <h2>Часто задаваемые вопросы:</h2>
+                    <li className="FAQblock">
+                        <div className="question"><span>Вопрос:</span>  Почему некоторые фильмы не могу найти?</div>
+                        <div className="answer"><span>Ответ:</span>  Сайт сделан в демонстративных целях и не преследует цели онлайн кинотеатра в полном объеме.</div>
+                    </li>
+                    <li className="FAQblock">
+                        <div className="question"><span>Вопрос:</span>  Есть ли возможность сменить тему?</div>
+                        <div className="answer"><span>Ответ:</span>  Да, в настройках вверху страницы всегда можно подобрать подходящую тему.</div>
+                    </li>
+
+                    <li className="FAQblock">
+                        <div className="question"><span>Вопрос:</span>  Есть ли возможность смотреть фильм даже если поисковик не нашел его?</div>
+                        <div className="answer"><span>Ответ:</span>  Да, нажмите кнопку "Смотреть фильм" и вам будет предложен фильм в соответствии с поисковым запросом, даже если фильма нет в базе данных.</div>
+                    </li>
+
+                </ul>
+
+            </section >
         )
     }
 }

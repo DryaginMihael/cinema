@@ -1,15 +1,25 @@
 import React from 'react'
 import FilmsList from './FilmsList/FilmsList'
 import './Films.css'
+import Loading from '../../../components/UI/Loader/Loader'
+import Button from '../../../components/UI/Button/Button'
+import Center from '../../../components/Align/Center/Center'
 
 export default class Films extends React.Component {
 
     state = {
         isLittleIcon: true,
+        loading: false,
+        count: 20
     }
 
     toggleHandler = () => {
         this.setState({ isLittleIcon: !this.state.isLittleIcon })
+    }
+
+    loading = () => {
+        this.setState({ loading: true })
+        setTimeout(() => { this.setState({ loading: false, count: this.state.count + 10 }) }, 500)
     }
 
     render() {
@@ -30,8 +40,16 @@ export default class Films extends React.Component {
                     </div>
                 </div>
 
-                <FilmsList count={20} isLittleIcon={this.state.isLittleIcon} />
-
+                <FilmsList
+                    isLittleIcon={this.state.isLittleIcon}
+                    count={this.state.count}
+                />
+                <Center>
+                    {this.state.loading ? <Loading /> : <Button
+                        classesButton={['dark']}
+                        clickHandler={() => this.loading()}
+                    >Показать ещё</Button>}
+                </Center>
             </section>
         )
     }

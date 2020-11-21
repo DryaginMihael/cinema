@@ -76,47 +76,51 @@ select.setting-item{
 	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
   }
 
-
-.range{
-	margin: 15px;
-}  
-.custom-range{
-	-webkit-appearance: none;  /* Override default CSS styles */
-	appearance: none;
-	width: 100%; /* Full-width */
-	height: 5px; /* Specified height */
-	background: linear-gradient(90deg, #8408cd 0%, #527eb3 100% ); /* Grey background */
-	outline: none; /* Remove outline */
-	opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-	-webkit-transition: .2s; /* 0.2 seconds transition on hover */
-	transition: opacity .2s;
-	border-radius: 3px;
-}
-.custom-range::-webkit-slider-thumb {
-	box-sizing: border-box;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    background: #141414;
-	cursor: pointer;
-	border: 1px solid #adb5bd;
-	border-radius: 9px;
-}
-
 .alphabet{
 	  margin: 15px;
   }
 .alphabet ul{
 	width: 240px;
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
 }
 .alphabet li {
 	list-style: none;
-	margin: 0 10px 10px 0;
+	margin: 5px;
 	padding: 7px;
 	background-color: #141414;
 	border-radius: 3px;
 	cursor: pointer;
 }  
+.alphabet li{
+	text-align: center;
+}
+
+.films-new{
+	display: flex;
+}
+
+.FAQ {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.FAQ .FAQblock{
+	margin: 0 0 30px 20px;
+}
+
+.question{
+	margin-bottom: 10px;
+}
+
+.answer{
+}
+
+.question span{
+	color: #F6BB10;
+}
+
+.answer span{
+	color: #8408cd;
+}

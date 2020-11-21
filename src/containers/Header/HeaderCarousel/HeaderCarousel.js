@@ -1,12 +1,13 @@
 import React from 'react'
 import './HeaderCarousel.css'
-import FilmCarousel from './FilmCarousel/FilmCarousel'
+import FilmItem from '../../Main/Films/FilmItem/FilmItem'
 
 export default class HeaderCarousel extends React.Component {
 
     state = {
         shift: 0,
         widthItem: 170,
+        FilmsList: null,
     }
 
     prevOnClick = () => {
@@ -27,6 +28,7 @@ export default class HeaderCarousel extends React.Component {
 
 
     componentDidMount() {
+        this.drawFilms()
         setInterval(() => {
             const widthList = this.props.count * this.state.widthItem
             const visibleList = 6 * this.state.widthItem
@@ -37,17 +39,33 @@ export default class HeaderCarousel extends React.Component {
         }, 10000)
     }
 
-    drawFilms(count) {
+    async drawFilms() {
 
-        const arr = []
+        let response = await fetch('./films.json');
 
-        for (let i = 0; i < count; i++) {
-            arr.push(<FilmCarousel key={i} />)
+        if (response.ok) {
+            const data = await response.json()
+            const films = data.movies
+
+            let arr = []
+
+            arr = Object.keys(films).map((filmNum) => {
+                const film = films[filmNum]
+                if (filmNum < 10) {
+                    return (<FilmItem
+                        key={"carousel" + filmNum}
+                        name={film.title}
+                        poster={film.poster}
+                        isLittleIcon={true}
+                    />)
+                } else {
+                    return null
+                }
+            })
+            this.setState({ FilmsList: arr })
+        } else {
+            alert("Ошибка HTTP: " + response.status);
         }
-
-        return (
-            arr
-        )
     }
 
     render() {
@@ -62,7 +80,7 @@ export default class HeaderCarousel extends React.Component {
                 </button>
                 <div className="carousel-contain">
                     <ul style={{ transform: `translateX(${this.state.shift}px)`, width: `${this.props.count * (this.state.widthItem + 20)}px` }}>
-                        {this.drawFilms(this.props.count)}
+                        {this.state.FilmsList}
                     </ul>
                 </div>
             </div >

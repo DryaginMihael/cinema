@@ -1,31 +1,34 @@
 import React from 'react'
 import './FilmItem.css'
+import { NavLink } from 'react-router-dom'
 
 export default class FilmItem extends React.Component {
 
+    showFilmHandler = () => {
+    }
+
     render() {
         return (
-            <li class="film" style={this.props.upgrade.filmStyle}>
-                <div class="preview" style={this.props.upgrade.previewStyle}>
-                    <img src="" alt=""></img>
-                    <div class="quality">HD-RIP</div>
-                    <div class="translate">Дубляж</div>
-                    <div class="rate"><i class="far fa-star"></i> 7.5</div>
-                    <div class="name">Lorem ipsum</div>
+            // <NavLink to={'/film/' + this.props.name}>
+            <li className={"film" + (this.props.isLittleIcon ? '' : ' wide')} >
+                <div
+                    className={"preview" + (this.props.isLittleIcon ? '' : ' wide')}
+                    onClick={this.showFilmHandler}
+                >
+                    <img src={this.props.poster} alt="" width="150px" height="217px"></img>
+                    <div className="quality">HD-RIP</div>
+                    <div className="translate">Дубляж</div>
+                    <div className="rate"><i class="far fa-star"></i> {this.props.rate}</div>
+                    <div className="name">{this.props.name}</div>
                 </div>
-                <div class="desc" style={this.props.upgrade.descStyle}>
-                    <h2>Lorem ipsum</h2>
+                <div className={"desc" + (this.props.isLittleIcon ? '' : ' wide')} >
+                    <h2>{this.props.name}</h2>
                     <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci voluptate placeat
-                        aspernatur, minima dicta debitis optio, excepturi iure itaque eveniet commodi neque
-                        accusamus corrupti? Aspernatur maxime accusamus optio amet voluptate.Tempore dolor
-                        recusandae ducimus cumque expedita eius vitae nam in, quos, sit ipsam mollitia
-                        magnam,
-                        ab tenetur. Dolorem enim sed animi dolore, ipsa possimus nulla incidunt! Eum beatae
-                        possimus illum?
+                        {this.props.desc}
                     </p>
                 </div>
             </li>
+            // </NavLink>
         )
     }
 }
