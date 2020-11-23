@@ -48,9 +48,35 @@ table{
     border-collapse: collapse;
 }
 td{
-    padding: 5px;
+    padding: 10px;
     border-bottom: 2px solid rgba(255, 255, 255, .1);
 }
 .uitools{
     margin: 20px auto !important;
+    width: 610px;
+    height: 370px;
+    background-color: #000;
+}
+
+.comments-list{
+    padding: 0;
+    margin: 0;
+}
+
+.comments-list .comment{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comments-list .comment-img{
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 25px;
+    display: inline-block;
+}
+.comments-list .comment-body{
+    display: inline-block;
+    width: 70%;
 }

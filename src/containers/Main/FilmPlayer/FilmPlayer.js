@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../../../components/UI/Button/Button';
 import './FilmPlayer.css'
 
 
@@ -10,7 +11,20 @@ export default class FilmPlayer extends React.Component {
         directors: [],
         actors: [],
         countries: [],
-        rating_kinopoisk: null
+        rating_kinopoisk: null,
+        comments: [
+            {
+                author: "Lorem ipsum",
+                img: "",
+                text: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci voluptate placeat
+                aspernatur, minima dicta debitis optio, excepturi iure itaque eveniet commodi neque
+                accusamus corrupti? Aspernatur maxime accusamus optio amet voluptate.`
+            }
+        ],
+        currentUser: {
+            author: "Lorem ipsum",
+            img: ""
+        }
     }
 
     async drawFilmBlock(isLittleIcon) {
@@ -84,7 +98,10 @@ export default class FilmPlayer extends React.Component {
             <div className="activeimg">
                 <img src={this.state?.activeFrame} alt="" height="400px" ></img>
             </div>
-            <ul className="frames-carousel" style={{ transform: `translateX(${this.state.carouselShift}px)` }}>
+            <ul className="frames-carousel" style={{
+                transform: `translateX(${this.state.carouselShift
+                    }px)`
+            }}>
                 {this.state?.frames ? this.state.frames.map((frame) => {
                     return (
                         <li
@@ -96,6 +113,33 @@ export default class FilmPlayer extends React.Component {
                 }) : null}
             </ul>
         </div>)
+
+        const comments = this.state.comments.map((comment) => {
+            return (
+                <li className="comment">
+                    <div className="comment-img">
+                        <img src={comment.img} alt=""></img>
+                    </div>
+                    <div className="comment-body">
+                        <h4 className="comment-author">{comment.author}</h4>
+                        <p className="comment-text">{comment.text}</p>
+                    </div>
+                </li>
+            )
+        })
+
+        const createComment = (
+            <li className="comment">
+                <div className="comment-img">
+                    <img src={this.state.currentUser.img} alt=""></img>
+                </div>
+                <div className="comment-body">
+                    <h4 className="comment-author">{this.state.currentUser.author}</h4>
+                    <textarea></textarea>
+                </div>
+                <Button classesButton={["dark"]}>Отправить</Button>
+            </li>
+        )
 
         return (
             <div className="film-block">
@@ -113,7 +157,7 @@ export default class FilmPlayer extends React.Component {
                             </tr>
                             <tr>
                                 <td className="first-column">Актеры</td>
-                                <td>{this.state.actors.join(" ")}</td>
+                                <td>{this.state.actors.join(", ")}</td>
                             </tr>
                             <tr>
                                 <td className="first-column">Страны</td>
@@ -136,6 +180,11 @@ export default class FilmPlayer extends React.Component {
                 <div className="uitools" id="uitools"></div>
 
                 {frames}
+
+                <ul className="comments-list">
+                    {/* {comments} */}
+                    {/* {createComment} */}
+                </ul>
 
             </div>
         )
