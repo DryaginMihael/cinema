@@ -6,6 +6,7 @@ export default class HeaderTop extends React.Component {
     render() {
         return (
             <div className="header-top">
+
                 <div className="logo">
                     <h1>KINO</h1>
                 </div>

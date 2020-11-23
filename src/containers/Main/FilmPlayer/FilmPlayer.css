@@ -1,0 +1,56 @@
+.film-block{
+    margin: 0 20px;
+}
+.frames{
+    margin: 0 auto;
+    position: relative;
+    width: 610px;
+    overflow: hidden;
+}
+.frames-carousel{
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+    transition: transform .3s ease;
+}
+.frames li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 5px;
+}
+.frames li img{
+    transition: transform 0.3 ease;
+    box-sizing: border-box;
+}
+.active-frame{
+    border: 2px solid #fff;
+    transform: scale(1.2);
+}
+.activeimg{
+    text-align: center;
+}
+.poster{
+}
+.info{
+    margin-left: 30px;
+}
+.header-film{
+    display: flex;
+    justify-self: flex-start;
+}
+.first-column{
+    width: 150px;
+}
+table{
+
+    border-collapse: collapse;
+}
+td{
+    padding: 5px;
+    border-bottom: 2px solid rgba(255, 255, 255, .1);
+}
+.uitools{
+    margin: 20px auto !important;
+}

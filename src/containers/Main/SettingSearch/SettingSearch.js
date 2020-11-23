@@ -20,16 +20,16 @@ export default class SettingSearch extends React.Component {
                         <button className="setting-item">Поиск</button>
                         <button className="setting-item">Очистить</button>
                         <input type="checkbox" className="custom-checkbox" id="films" />
-                        <label className="setting-item" for="films">
+                        <label className="setting-item" htmlFor="films">
                             Фильмы</label>
                         <input type="checkbox" className="custom-checkbox" id="mult" />
-                        <label className="setting-item" for="mult">
+                        <label className="setting-item" htmlFor="mult">
                             Мультфильмы</label>
                         <input type="checkbox" className="custom-checkbox" id="serials" />
-                        <label className="setting-item" for="serials">
+                        <label className="setting-item" htmlFor="serials">
                             Сериалы</label>
                         <input type="checkbox" className="custom-checkbox" id="anime" />
-                        <label className="setting-item" for="anime">
+                        <label className="setting-item" htmlFor="anime">
                             Аниме</label>
                         <select className="setting-item">
                             <option>Год</option>

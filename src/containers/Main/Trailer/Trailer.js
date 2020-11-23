@@ -2,6 +2,7 @@ import React from 'react'
 import './Trailer.css'
 
 export default class Trailer extends React.Component {
+
     render() {
         return (
             <div className="trailers">

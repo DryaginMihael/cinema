@@ -41,11 +41,10 @@ export default class HeaderCarousel extends React.Component {
 
     async drawFilms() {
 
-        let response = await fetch('./films.json');
+        let response = await fetch('http://localhost:3000/movies')
 
         if (response.ok) {
-            const data = await response.json()
-            const films = data.movies
+            const films = await response.json()
 
             let arr = []
 
@@ -71,7 +70,7 @@ export default class HeaderCarousel extends React.Component {
     render() {
 
         return (
-            <div class="carousel">
+            <div className="carousel">
                 <button className="prev" onClick={this.prevOnClick}>
                     <i className="fas fa-arrow-circle-left"></i>
                 </button>

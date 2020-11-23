@@ -28,7 +28,7 @@ export default class InputRange extends React.Component {
         return (
             <label
                 className="range"
-                forId={this.props.id}
+                htmlFor={this.props.id}
             >
                 {this.props.children}
                 <div className="stars">{this.state.value} {this.createStars()} </div>
