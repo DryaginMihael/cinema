@@ -1,10 +1,11 @@
 import React from 'react'
+import Container from '../../components/Align/Container/Container'
 import './Footer.css'
 
 export default function Footer(props) {
     return (
         <footer>
-            <div className="container">
+            <Container >
                 <div className="footer-top">
                     <div className="foo-sec">
                         <h4>Разделы</h4>
@@ -63,7 +64,7 @@ export default function Footer(props) {
                     </div>
                     <div className="copyright"><i className="far fa-copyright"></i> 2020 ООО «Кино.ру»</div>
                 </div>
-            </div>
+            </Container>
         </footer>
     )
 }

@@ -6,13 +6,6 @@ body{
 	background: url('./img/back.png') #000;
 }
 
-
-.container{
-	max-width: 1170px;
-	margin: 0 auto;
-	background: #1a191e;
-	box-sizing: border-box;
-}
 i:hover,
 button:hover{
 	cursor: pointer;
@@ -34,4 +27,3 @@ button:hover{
 	color: black;
 	background: #F6BB10;
 }
-  

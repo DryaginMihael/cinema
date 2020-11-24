@@ -1,4 +1,5 @@
 import React from 'react'
+import Container from '../../components/Align/Container/Container'
 import './Header.css'
 import HeaderCarousel from './HeaderCarousel/HeaderCarousel'
 import HeaderMenu from './HeaderMenu/HeaderMenu'
@@ -10,12 +11,12 @@ export default class Header extends React.Component {
     render() {
         return (
             <header>
-                <div className="container">
+                <Container >
                     <HeaderTop />
                     <HeaderMenu />
                     <HeaderCarousel count={10} />
-                </div>
-            </header>
+                </Container>
+            </header >
         )
     }
 

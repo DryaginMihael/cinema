@@ -13,13 +13,39 @@ export default class Films extends React.Component {
         count: 20
     }
 
+    componentDidMount() {
+
+        window.onscroll = () => {
+
+            const scrollHeight = Math.max(
+                document.body.scrollHeight, document.documentElement.scrollHeight,
+                document.body.offsetHeight, document.documentElement.offsetHeight,
+                document.body.clientHeight, document.documentElement.clientHeight
+            )
+
+            if (window.pageYOffset + document.documentElement.clientHeight > scrollHeight - 300 && this.state.loading) {
+                this.setState({ count: this.state.count + 20 })
+            }
+
+            const fastScroll = document.getElementsByClassName('fast-scroll')[0]
+
+
+            if (window.pageYOffset < 600) {
+                fastScroll.style.display = "none"
+            } else {
+                fastScroll.style.display = "inline"
+            }
+
+        }
+    }
+
     toggleHandler = () => {
         this.setState({ isLittleIcon: !this.state.isLittleIcon })
     }
 
     loading = () => {
         this.setState({ loading: true })
-        setTimeout(() => { this.setState({ loading: false, count: this.state.count + 10 }) }, 500)
+        setTimeout(() => { this.setState({ count: this.state.count + 20 }) }, 500)
     }
 
     render() {

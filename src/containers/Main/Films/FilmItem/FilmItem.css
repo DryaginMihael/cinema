@@ -6,12 +6,22 @@ a{
 .film {
 	box-sizing: border-box;
 	position: relative;
-	display: inline-flex;
+	display: flex;
 	list-style: none;
-	margin: 0 20px 20px 0;
-	transition: transform .3s ease-in-out;
+	margin: 0 10px 20px 10px;
 	cursor: pointer;
 	width: 150px;
+	overflow: hidden;	
+}
+.film.wide::after{
+	content: "";
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	top: 70%;
+	right: 0;
+	bottom: 0;
+	box-shadow: inset 0px -50px 30px -10px rgba(26, 25, 30, 0.9);
 }
 .film .preview{
 	box-sizing: border-box;
@@ -21,8 +31,9 @@ a{
 	height: 217px;
 	position: relative;
 	border-radius: 5px;
-	border: solid 1px #666;
-	box-shadow: 2px 2px 2px #666;
+	background-color: rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+	transition: transform .3s ease-in-out;
 }
 .film .preview img{
 	position: absolute;
@@ -32,7 +43,7 @@ a{
 	margin-left: 10px;
 	display: none;
 }
-.film:hover {
+.film .preview:hover {
 	transform: translateY(-5px);
 }
 .film .preview:hover::before,
@@ -107,14 +118,34 @@ a{
 	text-transform: uppercase;
 	font-weight: bold;
 	text-shadow: 1px 1px 1px #000;
+	opacity: 0;
+}
+.film .preview:hover .name{
+	opacity: 1;
 }
 
 .film.wide{
 	width: 100%;
+	height: 300px;
 }
 .film .desc.wide{
 	display: inline;
 }
 .film .preview.wide{
 	margin: 15px;
+}
+
+.short-info{
+    margin-left: 0px;
+}
+.short-info .first-column{
+    width: 120px;
+}
+.short-info table{
+
+    border-collapse: collapse;
+}
+.short-info td{
+    padding: 5px;
+    border-bottom: 2px solid rgba(255, 255, 255, .05);
 }

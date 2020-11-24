@@ -124,3 +124,10 @@ select.setting-item{
 .answer span{
 	color: #8408cd;
 }
+
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 991px) {
+    .setting-search{
+		display: none;
+	}
+}

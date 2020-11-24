@@ -1,24 +1,15 @@
 .header-top{
-
 	border-top-left-radius: 10px; 
 	border-top-right-radius: 10px;
 	height: 80px;
 	background: #141414;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
+	align-content: center;
 	align-items: center;
+	flex-wrap: wrap;
 }
 
-.header-top div {
-}
-
-.header-top .logo {
-	padding-left: 100px; 
-}
-
-.header-top .auth{
-	margin-right: 50px;
-}
 .header-top .auth button {
 	margin: 0 10px 0 0;
 	padding: 10px;
@@ -30,29 +21,43 @@
 
 .header-top button:nth-of-type(3) {
 	background: linear-gradient(90deg, #8408cd 0%, #527eb3 100% );
+	margin-right: 0;
 }
 
 .search {
 	position: relative;
+	width: 35%;
 }
 .search input {
 	box-shadow: none;
-	width: 400px;
+	width: 100%;
 	height: 30px;
 	background: #1c1b20;
 	border-radius: 15px;
 	outline: none;
 	color: #fff;
 	padding-left: 15px;
+	box-sizing: border-box;
 }
 .search button{
 	background: none;
 	border: none;
 	position: absolute;
-	right: 15px;
-	top: 2px;
+	right: 0px;
+	top: -2px;
 	outline: none;
 }
 .search button i{
 	color: #fff;
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+	.header-top{
+		height: 150px;
+	}
+	.search{
+		width: 70%;
+		order: 10;
+	}
 }

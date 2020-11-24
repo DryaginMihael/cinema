@@ -1,10 +1,10 @@
 .carousel {
 	position: relative;
 	border-bottom: solid 5px #8408cd;
-	
 }
 .carousel-contain {
-    width: 1000px;
+	width: 1000px;
+	height: 220px;
 	margin: 40px auto;
 	overflow: hidden;
 }
@@ -14,15 +14,22 @@
 	width: 2210px;
 	transition: transform .3s ease-in-out;
 }
-.carousel li{
-	margin: 0;
-	padding: 0;
-}
-.carousel li.film{
+.carousel a{
 	margin-right: 20px;
 	margin-bottom: 0px;
-	transform: none;
+}
+.carousel li.film{
+	margin: 0;
+	padding: 0;
+	display: inline-block;
 	box-sizing: border-box;
+}
+.carousel li.film .preview{
+	transform: none;
+}
+
+.film-last{
+	margin-right: 0;
 }
 .carousel button{
 	background: none;
@@ -35,9 +42,72 @@
 }
 .carousel button.prev{
 	left: 20px;
-	top: 100px;
+	top: 90px;
+	z-index: 1;
 }
 .carousel button.next{
 	right: 20px;
-	top: 100px;
+	top: 90px;
+	z-index: 1;
+}
+
+/* хром, сафари */
+.carousel-contain::-webkit-scrollbar { width: 0; }
+
+/* ie 10+ */
+.carousel-contain { -ms-overflow-style: none; }
+
+/* фф (свойство больше не работает, других способов тоже нет)*/
+.carousel-contain { overflow: -moz-scrollbars-none; }
+
+
+/* Large desktops and laptops */
+@media screen and (min-width: 1200px) {
+    .carousel-contain{
+        width: 1000px;
+	    margin: 40px auto;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .carousel-contain{
+        width: 830px;
+	    margin: 40px auto;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .carousel-contain{
+        width: 660px;
+	}
+	.carousel button.prev{
+		left: 10px;
+	}
+	.carousel button.next{
+		right: 10px;
+	}
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+	.carousel-contain{
+        width: 490px;
+	}
+	.carousel button.prev{
+		left: 0px;
+	}
+	.carousel button.next{
+		right: 0px;
+	}
+}
+
+/* Portrait phones and smaller */
+@media screen and (max-width: 480px) {
+
+}
+
+/* Iphone 5 */
+@media screen and (max-width: 320px) {
+
 }

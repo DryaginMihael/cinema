@@ -1,3 +1,6 @@
+.films{
+	max-width: 750px;
+}
 .films .toggle-location i{
 	width: 40px;
 	height: 40px;

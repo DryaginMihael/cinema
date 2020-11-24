@@ -21,10 +21,13 @@ export default class FilmsList extends React.Component {
 
     async drawFilms(isLittleIcon) {
 
-        let response = await fetch('http://localhost:3000/movies')
+        // let response = await fetch('http://localhost:3000/movies')
+        const response = await fetch('/Data/films.json')
 
         if (response.ok) {
-            const films = await response.json()
+            // const films = await response.json()
+            const data = await response.json()
+            const films = data.movies
 
             let arr = []
             arr = Object.keys(films).map((filmNum) => {
@@ -32,11 +35,18 @@ export default class FilmsList extends React.Component {
                 if (film.poster && filmNum <= this.props.count) {
                     return (<FilmItem
                         key={filmNum}
+
                         title={film.title}
+                        directors={film.directors}
+                        year={film.year}
+                        actors={film.actors}
+                        generes={film.generes}
+                        countries={film.countries}
                         id_kinopoisk={film.id_kinopoisk}
                         description={film.description}
                         poster={film.poster}
                         rating_kinopoisk={film.rating_kinopoisk}
+
                         isLittleIcon={isLittleIcon}
                     />)
                 }

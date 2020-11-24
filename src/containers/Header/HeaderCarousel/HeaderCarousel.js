@@ -18,17 +18,23 @@ export default class HeaderCarousel extends React.Component {
     }
 
     nextOnClick = () => {
+        // const slider = document.querySelector('.carousel-contain');
+
         const widthList = this.props.count * this.state.widthItem
         const visibleList = 6 * this.state.widthItem
         this.setState({ shift: this.state.shift - this.state.widthItem })
         if (this.state.shift <= visibleList - widthList) {
             this.setState({ shift: 0 })
         }
+        // slider.scrollLeft = -this.state.shift
+        console.log(this.state.shift);
     }
 
 
     componentDidMount() {
+
         this.drawFilms()
+
         setInterval(() => {
             const widthList = this.props.count * this.state.widthItem
             const visibleList = 6 * this.state.widthItem
@@ -37,25 +43,62 @@ export default class HeaderCarousel extends React.Component {
                 this.setState({ shift: 0 })
             }
         }, 10000)
+
+        const slider = document.querySelector('.carousel-contain');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 1; //scroll-fast
+            slider.scrollLeft = scrollLeft - walk;
+            console.log(slider.scrollLeft);
+        });
     }
 
-    async drawFilms() {
+    drawFilms = async () => {
 
-        let response = await fetch('http://localhost:3000/movies')
+        // let response = await fetch('http://localhost:3000/movies')
+        const response = await fetch('/Data/films.json')
 
         if (response.ok) {
-            const films = await response.json()
+            // const films = await response.json()
+            const data = await response.json()
+            const films = data.movies
 
             let arr = []
 
             arr = Object.keys(films).map((filmNum) => {
                 const film = films[filmNum]
-                if (filmNum < 10) {
+                if (filmNum < this.props.count) {
                     return (<FilmItem
+
                         key={"carousel" + filmNum}
-                        name={film.title}
+                        title={film.title}
+                        id_kinopoisk={film.id_kinopoisk}
+                        description={film.description}
                         poster={film.poster}
+                        rating_kinopoisk={film.rating_kinopoisk}
                         isLittleIcon={true}
+
                     />)
                 } else {
                     return null
@@ -78,7 +121,12 @@ export default class HeaderCarousel extends React.Component {
                     <i className="fas fa-arrow-circle-right"></i>
                 </button>
                 <div className="carousel-contain">
-                    <ul style={{ transform: `translateX(${this.state.shift}px)`, width: `${this.props.count * (this.state.widthItem + 20)}px` }}>
+                    <ul
+                        style={{
+                            transform: `translateX(${this.state.shift}px)`,
+                            width: `${this.props.count * this.state.widthItem}px`
+                        }}
+                    >
                         {this.state.FilmsList}
                     </ul>
                 </div>

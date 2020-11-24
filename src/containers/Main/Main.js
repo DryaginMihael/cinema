@@ -6,6 +6,7 @@ import SettingSearch from './SettingSearch/SettingSearch'
 import Trailer from './Trailer/Trailer'
 import FilmPlayer from './FilmPlayer/FilmPlayer'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import Container from '../../components/Align/Container/Container'
 
 
 let routes = (
@@ -23,14 +24,14 @@ export default class Main extends React.Component {
     render() {
         return (
             <main>
-                <div className="container">
-                    <Add />
-                    <Trailer />
+                <Container >
+                    {/* <Add /> */}
+                    {/* <Trailer /> */}
                     <div className="sidebars">
                         {routes}
                         <SettingSearch />
                     </div>
-                </div>
+                </Container>
             </main >
         )
     }

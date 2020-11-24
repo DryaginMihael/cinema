@@ -43,11 +43,11 @@
 .first-column{
     width: 150px;
 }
-table{
+.info table{
 
     border-collapse: collapse;
 }
-td{
+.info td{
     padding: 10px;
     border-bottom: 2px solid rgba(255, 255, 255, .1);
 }
@@ -79,4 +79,25 @@ td{
 .comments-list .comment-body{
     display: inline-block;
     width: 70%;
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+    .header-film {
+        display: block;
+    }
+
+    .frames {
+        width: 500px;
+    }
+    .poster{
+        text-align: center;
+    }
+    .first-column{
+        width: 100px;
+    }
+    .uitools{
+        width: 500px !important;
+        height: 300px !important;
+    }
 }

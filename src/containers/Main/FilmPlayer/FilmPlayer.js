@@ -24,21 +24,23 @@ export default class FilmPlayer extends React.Component {
         currentUser: {
             author: "Lorem ipsum",
             img: ""
-        }
+        },
+        frames: []
     }
 
     async drawFilmBlock(isLittleIcon) {
 
         const kp_id = window.location.pathname.replace("/film/", "");
 
-        let response = await fetch('http://localhost:3000/movies')
+        const response = await fetch('/Data/films.json')
 
         if (response.ok) {
-            const films = await response.json()
+            const data = await response.json()
+            const films = data.movies
 
             Object.keys(films).forEach((filmNum) => {
                 const film = films[filmNum]
-                if (film.id_kinopoisk == kp_id) {
+                if (film.id_kinopoisk === kp_id) {
                     this.setState({
                         title: film.title,
                         id_kinopoisk: film.id_kinopoisk,
@@ -99,8 +101,7 @@ export default class FilmPlayer extends React.Component {
                 <img src={this.state?.activeFrame} alt="" height="400px" ></img>
             </div>
             <ul className="frames-carousel" style={{
-                transform: `translateX(${this.state.carouselShift
-                    }px)`
+                transform: `translateX(${this.state.carouselShift}px)`
             }}>
                 {this.state?.frames ? this.state.frames.map((frame) => {
                     return (

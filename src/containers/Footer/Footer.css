@@ -29,3 +29,17 @@ footer{
 	color: #fff;
 	cursor: pointer;
 }
+
+@media screen and (max-width: 767px) {
+	.footer-top{
+		display: none;
+	}
+	.footer-bottom{
+		display: block;
+		background: #141414;
+		text-align: center;
+	}
+	.footer-bottom .subscribe{
+		margin-bottom: 10px;
+	}
+}
