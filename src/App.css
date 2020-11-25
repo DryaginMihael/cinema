@@ -27,3 +27,10 @@ button:hover{
 	color: black;
 	background: #F6BB10;
 }
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+	body{
+		padding: 0;
+	}
+}

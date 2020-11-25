@@ -102,6 +102,12 @@
 	}
 }
 
+@media screen and (max-width: 540px) {
+	.carousel-contain{
+        width: 320px;
+	}
+}
+
 /* Portrait phones and smaller */
 @media screen and (max-width: 480px) {
 

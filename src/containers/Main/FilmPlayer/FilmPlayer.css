@@ -97,7 +97,17 @@
         width: 100px;
     }
     .uitools{
-        width: 500px !important;
-        height: 300px !important;
+        width: 500px;
+        height: 304px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .uitools{
+        width: 400px;
+        height: 243px;
+    }
+    .frames {
+        width: 400px;
     }
 }

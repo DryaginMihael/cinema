@@ -6,3 +6,29 @@ main .container{
 	display: flex;
 	justify-content: space-between;
 }
+
+.wide-search{
+	position: fixed;
+	top: 150px;
+	right: -140px;
+	border-radius: 0;
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+	z-index: 5;
+	transition: all .3s ease;
+	opacity: 0;
+}
+.wide-search{
+	height: 40px;
+	line-height: 40px;
+	padding: 0;
+	padding-right: 10px;
+}
+.wide-search i{
+	height: 40px;
+	width: 40px;
+	font-size: 15px;
+}
+.wide-search:hover{
+	right: 0px;
+}

@@ -128,6 +128,21 @@ select.setting-item{
 /* Portrait tablets and small desktops */
 @media screen and (max-width: 991px) {
     .setting-search{
+		position: fixed;
+		display: none;
+		top: 190px;
+		right: 0;
+		z-index: 5;
+		background-color: rgba(0, 0, 0, 0.9);
+		border-radius: 10px;
+	}
+	.setting-search.show{
+		display: block;
+	}
+	.setting-search .alphabet,
+	.setting-search .new-films,
+	.setting-search .FAQ,
+	.setting-search .shuffle-cont{
 		display: none;
 	}
 }

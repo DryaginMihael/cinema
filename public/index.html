@@ -26,10 +26,25 @@
   <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
   <script>
 
+    const width = document.documentElement.clientWidth
+    let widthPlayer = 610
+    let heightPlayer = 370
+
+    if (width < 767) {
+      widthPlayer = "500"
+      heightPlayer = "304"
+    }
+
+    if (width < 550) {
+      widthPlayer = "400"
+      heightPlayer = "243"
+    }
+    console.log(width, widthPlayer, heightPlayer);
+
     let kp_id = window.location.pathname.replace("/film/", "");
     var dataTitle = "{}";
     var my_script_play = document.createElement("script");
-    my_script_play.setAttribute("src", "//pleer.uitools.space/get_player?w=610&h=370&type=widget&kp_id=" + kp_id + "&name=&players=apicollaps,videocdn,bazon,hdvb,alloha,ustore,trailer&ani=COLLAPS&ati=&adi=&vni=VIDEOCDN&vti=&vdi=&hni=HDVB&hti=&hdi=&bni=BAZON&bti=&bdi=&alni=ALLOHATV&alti=&aldi=&usni=USTOREBZ&usti=&usdi=&data_title=" + dataTitle);
+    my_script_play.setAttribute("src", "//pleer.uitools.space/get_player?w=" + widthPlayer + "&h=" + heightPlayer + "&type=widget&kp_id=" + kp_id + "&name=&players=apicollaps,videocdn,bazon,hdvb,alloha,ustore,trailer&ani=COLLAPS&ati=&adi=&vni=VIDEOCDN&vti=&vdi=&hni=HDVB&hti=&hdi=&bni=BAZON&bti=&bdi=&alni=ALLOHATV&alti=&aldi=&usni=USTOREBZ&usti=&usdi=&data_title=" + dataTitle);
     my_script_play.async = true;
     document.head.appendChild(my_script_play);
 

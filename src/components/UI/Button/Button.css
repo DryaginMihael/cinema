@@ -16,3 +16,13 @@ button{
 	color: #fff;
 	background:  #1a191e;
 }
+.button-hide{
+	display: none;
+}
+
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 991px) {
+	.button-hide{
+		display: inline;
+	}
+}

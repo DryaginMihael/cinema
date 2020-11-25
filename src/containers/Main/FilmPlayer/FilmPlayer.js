@@ -173,7 +173,7 @@ export default class FilmPlayer extends React.Component {
                     </div>
                 </div>
                 <div className="description">
-                    <p>{this.state.description}</p>
+                    <p>{this.state.description}</p> 
                 </div>
 
                 <h2>Смотреть онлайн</h2>

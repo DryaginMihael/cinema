@@ -38,7 +38,7 @@
 		height: 50px;
 	}
 	.header-menu li{
-		padding: 10px 5px;
+		padding: 10px 8px;
 		text-align: center;
 		border: none;
 	}
@@ -46,9 +46,19 @@
 		display: block;
 		color: #fff;
 		font-size: 20px;
-		/* border-bottom: solid 5px #8408cd; */
 	}
 	.header-menu ul.visible{
 		height: 330px;
+	}
+}
+@media screen and (max-width: 767px){
+	.header-menu{
+		padding-top: 150px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+    .header-menu{
+		padding-top: 200px;
 	}
 }

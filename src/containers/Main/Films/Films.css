@@ -32,3 +32,17 @@
 	list-style: none;
 	margin-right: 10px;
 }
+
+@media screen and (max-width: 540px) { 
+	.films h3{
+		display: block;
+		padding: 0;
+		margin: 0 auto 20px;
+	}
+	.films .toggle-location{
+		text-align:  center;
+	}
+	.sort ul{
+		justify-content: center;
+	}
+}

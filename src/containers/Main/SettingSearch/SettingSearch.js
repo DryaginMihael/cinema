@@ -10,7 +10,7 @@ export default class SettingSearch extends React.Component {
         let arr_RU = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
 
         return (
-            <section className="setting-search">
+            <section className={this.props.showSetting ? "setting-search show" : "setting-search"}>
                 <form>
                     <div className="shuffle-cont">
                         <button className="shuffle"><i className="fas fa-random"></i> Случайный выбор</button>

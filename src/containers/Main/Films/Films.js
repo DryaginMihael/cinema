@@ -28,12 +28,15 @@ export default class Films extends React.Component {
             }
 
             const fastScroll = document.getElementsByClassName('fast-scroll')[0]
+            const wideSearch = document.getElementsByClassName('wide-search')[0]
 
 
             if (window.pageYOffset < 600) {
                 fastScroll.style.display = "none"
+                wideSearch.style.opacity = "0"
             } else {
                 fastScroll.style.display = "inline"
+                wideSearch.style.opacity = ".9"
             }
 
         }
@@ -55,6 +58,7 @@ export default class Films extends React.Component {
                     <h3>НОВЫЕ ФИЛЬМЫ И СЕРИАЛЫ</h3>
                     <i className={this.state.isLittleIcon ? "fas fa-th active" : "fas fa-th"} onClick={this.toggleHandler}></i>
                     <i className={this.state.isLittleIcon ? "fas fa-align-justify" : "fas fa-align-justify active"} onClick={this.toggleHandler}></i>
+
                     <div className="sort">
                         Сортировать по
                             <ul>

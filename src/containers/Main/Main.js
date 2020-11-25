@@ -7,6 +7,7 @@ import Trailer from './Trailer/Trailer'
 import FilmPlayer from './FilmPlayer/FilmPlayer'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Container from '../../components/Align/Container/Container'
+import Button from '../../components/UI/Button/Button'
 
 
 let routes = (
@@ -19,7 +20,9 @@ let routes = (
 
 export default class Main extends React.Component {
 
-
+    state = {
+        showSetting: false
+    }
 
     render() {
         return (
@@ -29,7 +32,13 @@ export default class Main extends React.Component {
                     {/* <Trailer /> */}
                     <div className="sidebars">
                         {routes}
-                        <SettingSearch />
+
+                        <Button
+                            clickHandler={() => this.setState({ showSetting: !this.state.showSetting })}
+                            classesButton={["dark", "button-hide", "wide-search"]}
+                            classesIcon={this.state.showSetting ? ["fas fa-times"] : ["fas fa-search"]}
+                        >Расширенный поиск</Button>
+                        <SettingSearch showSetting={this.state.showSetting} />
                     </div>
                 </Container>
             </main >
