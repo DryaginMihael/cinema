@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import './HeaderMenu.css'
 
 export default class HeaderMenu extends React.Component {
@@ -13,8 +14,8 @@ export default class HeaderMenu extends React.Component {
 
     render() {
         return (
-            <nav className="header-menu">
-                <ul className={this.state.visible ? "visible" : null}>
+            <nav className={this.state.visible ? "header-menu visible" : "header-menu"} >
+                <ul>
                     <li className="burger" onClick={this.showMenu}><i className="fas fa-align-justify"></i></li>
 
                     <li><a href="/"><i className="fas fa-home"></i>&#32; Главная</a></li>

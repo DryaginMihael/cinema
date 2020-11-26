@@ -7,15 +7,17 @@ import { BrowserRouter } from 'react-router-dom'
 import FastScroll from './components/UI/FastScroll/FastScroll'
 
 
+
 function App() {
 
   return (
-    <BrowserRouter>
-      <Header />
-      <Main />
-      <Footer />
-      <FastScroll />
-    </BrowserRouter>
+      <BrowserRouter>
+        <Header />
+        <Main />
+        <Footer />
+        <FastScroll />
+      </BrowserRouter>
+    
   );
 }
 

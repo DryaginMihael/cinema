@@ -54,7 +54,7 @@
 /* Landscape phones and portrait tablets */
 @media screen and (max-width: 767px) {
 	.header-top{
-		height: 150px;
+		height: 140px;
 		position: fixed;
 		width: 100%;
 		z-index: 5;

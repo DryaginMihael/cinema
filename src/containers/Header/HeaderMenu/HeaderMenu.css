@@ -1,3 +1,7 @@
+.header-menu{
+	background-color: #1a191e;
+	transition: all .5s ease;
+}
 .header-menu ul{
 	padding: 0;
 	margin: 0;
@@ -47,14 +51,24 @@
 		color: #fff;
 		font-size: 20px;
 	}
-	.header-menu ul.visible{
+	.header-menu.visible ul{
 		height: 330px;
+	}
+	.header-menu.visible{
+		top: 140px;
 	}
 }
 @media screen and (max-width: 767px){
 	.header-menu{
-		padding-top: 150px;
+		top: 85px;
+		position: fixed;
+		z-index: 10;
+		width: 100%;
 	}
+	.header-menu li{
+		background-color: #1a191e;
+	}
+
 }
 
 @media screen and (max-width: 320px) {

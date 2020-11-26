@@ -91,6 +91,9 @@
 
 /* Landscape phones and portrait tablets */
 @media screen and (max-width: 767px) {
+	.carousel{
+		margin-top: 180px;
+	}
 	.carousel-contain{
         width: 490px;
 	}

@@ -161,7 +161,9 @@ a{
 	.film .preview.wide{
 		float: none;
 		display: inline-block;
-		text-align: unset;
+	}
+	.film .preview.wide img{
+		left: 0px;
 	}
 	.film .desc.wide table{
 		text-align: start;

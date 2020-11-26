@@ -1,21 +1,77 @@
 import React from 'react'
-import { connect } from 'react-redux';
 import Button from '../../../components/UI/Button/Button';
-import { fetchPlayer } from '../../../store/actions/player';
 import './FilmPlayer.css'
 
 
 
-class FilmPlayer extends React.Component {
+export default class FilmPlayer extends React.Component {
 
     state = {
-        carouselShift: 0,
-        activeFrame: ""
+        title: "",
+        id_kinopoisk: null,
+        description: "",
+        poster: "",
+        directors: [],
+        actors: [],
+        countries: [],
+        generes: [],
+
+        frames: [],
+        carouselShift: null,
+        activeFrame: "",
+
+        rating_kinopoisk: null,
+        comments: [
+            {
+                author: "Lorem ipsum",
+                img: "",
+                text: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci voluptate placeat
+                aspernatur, minima dicta debitis optio, excepturi iure itaque eveniet commodi neque
+                accusamus corrupti? Aspernatur maxime accusamus optio amet voluptate.`
+            }
+        ],
+        currentUser: {
+            author: "Lorem ipsum",
+            img: ""
+        },
+    }
+
+    async drawFilmBlock(isLittleIcon) {
+
+        const kp_id = window.location.pathname.replace("/film/", "");
+
+        const response = await fetch('/Data/films.json')
+
+        if (response.ok) {
+            const data = await response.json()
+            const films = data.movies
+
+            Object.keys(films).forEach((filmNum) => {
+                const film = films[filmNum]
+                if (film.id_kinopoisk === kp_id) {
+                    this.setState({
+                        title: film.title,
+                        id_kinopoisk: film.id_kinopoisk,
+                        description: film.description,
+                        poster: film.poster,
+                        rating_kinopoisk: film.rating_kinopoisk,
+                        actors: film.actors,
+                        countries: film.countries,
+                        generes: film.generes,
+                        directors: film.directors,
+                        frames: film.frames,
+
+                        activeFrame: film?.frames[0]
+                    })
+                }
+            })
+        } else {
+            console.log("Ошибка HTTP: " + response.status)
+        }
     }
 
     componentDidMount() {
-
-        this.props.drawFilmBlock()
+        this.drawFilmBlock()
 
         let activeFrameNum = 0
 
@@ -23,10 +79,10 @@ class FilmPlayer extends React.Component {
             const widthList = document.querySelector('.frames-carousel').offsetWidth + 1000
             const visibleList = 600
             activeFrameNum++
-            if (activeFrameNum > this.props.frames.length) {
+            if (activeFrameNum > this.state.frames.length) {
                 activeFrameNum = 0
             }
-            this.props.frames.forEach(
+            this.state.frames.forEach(
                 (frame, index) => {
                     if (index === activeFrameNum) {
                         this.setState({ activeFrame: frame })
@@ -50,12 +106,12 @@ class FilmPlayer extends React.Component {
         const frames = (<div className="frames">
             <h2>Кадры:</h2>
             <div className="activeimg">
-                <img src={this.state.activeFrame || this.props.activeFrame} alt="" height="400px" ></img>
+                <img src={this.state?.activeFrame} alt="" height="400px" ></img>
             </div>
             <ul className="frames-carousel" style={{
                 transform: `translateX(${this.state.carouselShift}px)`
             }}>
-                {this.props.frames.map((frame) => {
+                {this.state?.frames ? this.state.frames.map((frame) => {
                     return (
                         <li
                             onClick={(evt) => this.activeFrameHandler(evt, frame)}
@@ -63,11 +119,11 @@ class FilmPlayer extends React.Component {
                             <img src={frame} alt="" height="60px"></img>
                         </li>
                     )
-                })}
+                }) : null}
             </ul>
         </div>)
 
-        const comments = this.props.comments.map((comment) => {
+        const comments = this.state.comments.map((comment) => {
             return (
                 <li className="comment">
                     <div className="comment-img">
@@ -84,10 +140,10 @@ class FilmPlayer extends React.Component {
         const createComment = (
             <li className="comment">
                 <div className="comment-img">
-                    <img src={this.props.currentUser.img} alt=""></img>
+                    <img src={this.state.currentUser.img} alt=""></img>
                 </div>
                 <div className="comment-body">
-                    <h4 className="comment-author">{this.props.currentUser.author}</h4>
+                    <h4 className="comment-author">{this.state.currentUser.author}</h4>
                     <textarea></textarea>
                 </div>
                 <Button classesButton={["dark"]}>Отправить</Button>
@@ -99,33 +155,33 @@ class FilmPlayer extends React.Component {
                 <img src={""} alt=""></img>
                 <div className="header-film">
                     <div className="poster">
-                        <img src={this.props.poster} alt="" width="200px"></img>
+                        <img src={this.state.poster} alt="" width="200px"></img>
                     </div>
                     <div className="info">
-                        <h2>{this.props.title}</h2>
+                        <h2>{this.state.title}</h2>
                         <table>
                             <tr>
                                 <td className="first-column">Режжисер</td>
-                                <td>{this.props.directors.join(" ")}</td>
+                                <td>{this.state?.directors.join(" ")}</td>
                             </tr>
                             <tr>
                                 <td className="first-column">Актеры</td>
-                                <td>{this.props.actors.join(", ")}</td>
+                                <td>{this.state.actors.join(", ")}</td>
                             </tr>
                             <tr>
                                 <td className="first-column">Страны</td>
-                                <td>{this.props.countries.join(' ')}</td>
+                                <td>{this.state.countries.join(' ')}</td>
                             </tr>
 
                             <tr>
                                 <td className="first-column">Рейтинг КиноПоиск</td>
-                                <td>{this.props.rating_kinopoisk}</td>
+                                <td>{this.state.rating_kinopoisk}</td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div className="description">
-                    <p>{this.props.description}</p>
+                    <p>{this.state.description}</p>
                 </div>
 
                 <h2>Смотреть онлайн</h2>
@@ -143,32 +199,3 @@ class FilmPlayer extends React.Component {
         )
     }
 }
-
-function mapStateToProps(state) {
-    return {
-        title: state.player.title,
-        id_kinopoisk: state.player.id_kinopoisk,
-        description: state.player.description,
-        poster: state.player.poster,
-        directors: state.player.directors,
-        actors: state.player.actors,
-        countries: state.player.countries,
-        generes: state.player.generes,
-
-        frames: state.player.frames,
-        activeFrame: state.player.activeFrame,
-
-        rating_kinopoisk: state.player.rating_kinopoisk,
-        comments: state.player.comments,
-        currentUser: state.player.currentUser,
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        drawFilmBlock: () => dispatch(fetchPlayer())
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilmPlayer)

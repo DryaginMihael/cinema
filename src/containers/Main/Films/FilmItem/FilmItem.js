@@ -31,6 +31,10 @@ export default class FilmItem extends React.Component {
                 href={'/film/' + this.props.id_kinopoisk}
                 onSelectStart={() => false}
             >
+                {/* <NavLink
+                to={'/film/' + this.props.id_kinopoisk}
+                onSelectStart={() => false}
+            > */}
                 <li className={"film" + (this.props.isLittleIcon ? '' : ' wide')}>
                     <div className={"preview" + (this.props.isLittleIcon ? '' : ' wide')}>
                         <img
@@ -47,6 +51,7 @@ export default class FilmItem extends React.Component {
                         {description}
                     </div>
                 </li>
+                {/* </NavLink> */}
             </a>
         )
     }
