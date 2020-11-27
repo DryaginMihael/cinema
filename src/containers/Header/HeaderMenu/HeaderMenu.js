@@ -18,14 +18,14 @@ export default class HeaderMenu extends React.Component {
                 <ul>
                     <li className="burger" onClick={this.showMenu}><i className="fas fa-align-justify"></i></li>
 
-                    <li><a href="/"><i className="fas fa-home"></i>&#32; Главная</a></li>
+                    <NavLink to="/"><li><i className="fas fa-home"></i>&#32; Главная</li></NavLink>
 
-                    <li><i className="fas fa-film"></i> Сериалы</li>
-                    <li><i className="fas fa-film"></i> Фильмы</li>
-                    <li><i className="far fa-star"></i> Популярные категории</li>
-                    <li><i className="fas fa-trophy"></i> Топы</li>
-                    <li>Вы остановились на <i className="far fa-pause-circle"></i></li>
-                    <li><i className="far fa-heart"></i> Закладки</li>
+                    <NavLink to="/tv-series"><li><i className="fas fa-film"></i> Сериалы</li></NavLink>
+                    <NavLink to="/films"><li><i className="fas fa-film"></i> Фильмы</li></NavLink>
+                    <NavLink to="/popular"><li><i className="far fa-star"></i> Популярные категории</li></NavLink>
+                    <NavLink to="/top"><li><i className="fas fa-trophy"></i> Топы</li></NavLink>
+                    <NavLink to="/pause"><li>Вы остановились на <i className="far fa-pause-circle"></i></li></NavLink>
+                    <NavLink to="/"><li><i className="far fa-heart"></i> Закладки</li></NavLink>
                 </ul>
             </nav>
         )

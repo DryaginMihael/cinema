@@ -1,67 +1,42 @@
 import React from 'react'
 import './FilmsList.css'
-import FilmItem from '../FilmItem/FilmItem'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { drawFilms } from '../../../../store/actions/films'
 
 
-export default class FilmsList extends React.Component {
-
-    state = {
-        FilmsList: null
-    }
+class FilmsList extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps !== this.props) {
-            this.drawFilms(nextProps.isLittleIcon)
+            this.props.drawFilms(this.props.isLittleIcon, this.props.count, this.props.match.params.filtr)
         }
     }
 
     componentDidMount() {
-        this.drawFilms(this.props.isLittleIcon)
-    }
-
-    async drawFilms(isLittleIcon) {
-
-        // let response = await fetch('http://localhost:3000/movies')
-        const response = await fetch('/Data/films.json')
-
-        if (response.ok) {
-            // const films = await response.json()
-            const data = await response.json()
-            const films = data.movies
-
-            let arr = []
-            arr = Object.keys(films).map((filmNum) => {
-                const film = films[filmNum]
-                if (film.poster && filmNum <= this.props.count) {
-                    return (<FilmItem
-                        key={filmNum}
-
-                        title={film.title}
-                        directors={film.directors}
-                        year={film.year}
-                        actors={film.actors}
-                        generes={film.generes}
-                        countries={film.countries}
-                        id_kinopoisk={film.id_kinopoisk}
-                        description={film.description}
-                        poster={film.poster}
-                        rating_kinopoisk={film.rating_kinopoisk}
-
-                        isLittleIcon={isLittleIcon}
-                    />)
-                }
-            })
-            this.setState({ FilmsList: arr })
-        } else {
-            console.log("Ошибка HTTP: " + response.status);
-        }
+        console.log(this.props);
+        this.props.drawFilms(this.props.isLittleIcon, this.props.count, this.props.match.params.filtr)
     }
 
     render() {
         return (
             <ul className="films-list">
-                {this.state.FilmsList}
+                {this.props.FilmsList}
             </ul>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        FilmsList: state.films.FilmsList
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        drawFilms: (isLittleIcon, count, filtr) => dispatch(drawFilms(isLittleIcon, count, filtr))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilmsList))

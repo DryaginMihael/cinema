@@ -20,21 +20,24 @@ class FilmPlayer extends React.Component {
         let activeFrameNum = 0
 
         setInterval(() => {
-            const widthList = document.querySelector('.frames-carousel').offsetWidth + 1000
-            const visibleList = 600
-            activeFrameNum++
-            if (activeFrameNum > this.props.frames.length) {
-                activeFrameNum = 0
-            }
-            this.props.frames.forEach(
-                (frame, index) => {
-                    if (index === activeFrameNum) {
-                        this.setState({ activeFrame: frame })
-                    }
-                })
-            this.setState({ carouselShift: this.state.carouselShift - 100 })
-            if (-this.state.carouselShift >= widthList - visibleList) {
-                this.setState({ carouselShift: 0 })
+            const framesCarousel = document.querySelector('.frames-carousel');
+            if (framesCarousel) {
+                const widthList = framesCarousel.offsetWidth + 1000
+                const visibleList = 600
+                activeFrameNum++
+                if (activeFrameNum > this.props.frames.length) {
+                    activeFrameNum = 0
+                }
+                this.props.frames.forEach(
+                    (frame, index) => {
+                        if (index === activeFrameNum) {
+                            this.setState({ activeFrame: frame })
+                        }
+                    })
+                this.setState({ carouselShift: this.state.carouselShift - 70 })
+                if (-this.state.carouselShift >= widthList - visibleList) {
+                    this.setState({ carouselShift: 0 })
+                }
             }
         }, 5000)
     }

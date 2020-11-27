@@ -21,7 +21,7 @@
     margin-left: 5px;
 }
 .frames li img{
-    transition: transform 0.3 ease;
+    transition: transform 0.3s ease;
     box-sizing: border-box;
 }
 .active-frame{
@@ -103,11 +103,37 @@
 }
 
 @media screen and (max-width: 550px) {
+    .film-block{
+        margin: 0;
+    }
     .uitools{
         width: 400px;
         height: 243px;
     }
     .frames {
         width: 400px;
+    }
+    .frames .activeimg img{
+        height: 300px ;
+    }
+    .frames li img{
+        height: 40px;
+    }
+    .info{
+        margin-left: 0;
+    }
+    
+}
+
+@media screen and (max-width: 430px) {
+    .uitools{
+        width: 320px;
+        height: 200px;
+    }
+    .frames .activeimg img{
+        height: 250px ;
+    }
+    .frames {
+        width: 300px;
     }
 }

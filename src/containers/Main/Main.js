@@ -13,6 +13,7 @@ import Button from '../../components/UI/Button/Button'
 let routes = (
     <Switch>
         <Route path="/film" component={FilmPlayer} />
+        <Route path="/:filtr" exact component={Films} />
         <Route path="/" exact component={Films} />
         <Redirect to="/" />
     </Switch>

@@ -61,17 +61,21 @@ export default class SettingSearch extends React.Component {
                     <div className="films-new">
                         <div className="film-new">
                             <FilmItem
-                                name={"Бойцовский клуб"}
-                                poster={"//images.kinopoisk.cloud/posters/361.jpg"}
-                                rate={"9.6"}
+                                film={{
+                                    name: "Бойцовский клуб",
+                                    poster: "//images.kinopoisk.cloud/posters/361.jpg",
+                                    rate: "9.6"
+                                }}
                                 isLittleIcon={true}
                             />
                         </div>
                         <div className="film-new">
                             <FilmItem
-                                name={"Джентельмены"}
-                                poster={"//images.kinopoisk.cloud/posters/1143242.jpg"}
-                                rate={"9.8"}
+                                film={{
+                                    name: "Джентельмены",
+                                    poster: "//images.kinopoisk.cloud/posters/1143242.jpg",
+                                    rate: "9.8"
+                                }}
                                 isLittleIcon={true}
                             />
                         </div>

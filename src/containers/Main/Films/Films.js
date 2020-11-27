@@ -30,7 +30,6 @@ export default class Films extends React.Component {
             const fastScroll = document.getElementsByClassName('fast-scroll')[0]
             const wideSearch = document.getElementsByClassName('wide-search')[0]
 
-
             if (window.pageYOffset < 600) {
                 fastScroll.style.display = "none"
                 wideSearch.style.opacity = "0"

@@ -90,15 +90,9 @@ export default class HeaderCarousel extends React.Component {
                 const film = films[filmNum]
                 if (filmNum < this.props.count) {
                     return (<FilmItem
-
                         key={"carousel" + filmNum}
-                        title={film.title}
-                        id_kinopoisk={film.id_kinopoisk}
-                        description={film.description}
-                        poster={film.poster}
-                        rating_kinopoisk={film.rating_kinopoisk}
+                        film={film}
                         isLittleIcon={true}
-
                     />)
                 } else {
                     return null
