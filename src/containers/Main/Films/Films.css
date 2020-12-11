@@ -44,5 +44,6 @@
 	}
 	.sort ul{
 		justify-content: center;
+		padding-left: 0;
 	}
 }

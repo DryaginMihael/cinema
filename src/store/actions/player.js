@@ -4,7 +4,7 @@ export function fetchPlayer() {
 
     return async dispatch => {
 
-        const kp_id = window.location.pathname.replace("/film/", "");
+        const kp_id = window.location.pathname.replace("/player/", "");
 
         const response = await fetch('/Data/films.json')
 

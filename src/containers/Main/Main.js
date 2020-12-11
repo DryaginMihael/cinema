@@ -5,25 +5,25 @@ import Films from './Films/Films'
 import SettingSearch from './SettingSearch/SettingSearch'
 import Trailer from './Trailer/Trailer'
 import FilmPlayer from './FilmPlayer/FilmPlayer'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import Container from '../../components/Align/Container/Container'
 import Button from '../../components/UI/Button/Button'
 
 
 let routes = (
     <Switch>
-        <Route path="/film" component={FilmPlayer} />
+        <Route path="/player" component={FilmPlayer} />
         <Route path="/:filtr" exact component={Films} />
         <Route path="/" exact component={Films} />
         <Redirect to="/" />
     </Switch>
 )
 
-export default class Main extends React.Component {
+class Main extends React.Component {
 
     state = {
         showSetting: false
-    }
+    } 
 
     render() {
         return (
@@ -39,7 +39,9 @@ export default class Main extends React.Component {
                             classesButton={["dark", "button-hide", "wide-search"]}
                             classesIcon={this.state.showSetting ? ["fas fa-times"] : ["fas fa-search"]}
                         >Расширенный поиск</Button>
-                        <SettingSearch showSetting={this.state.showSetting} />
+                        {this.props.location.pathname.includes("player") ?
+                            null :
+                            <SettingSearch showSetting={this.state.showSetting} />}
                     </div>
                 </Container>
             </main >
@@ -47,3 +49,5 @@ export default class Main extends React.Component {
     }
 
 }
+
+export default withRouter(Main)

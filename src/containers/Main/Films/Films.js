@@ -10,7 +10,7 @@ export default class Films extends React.Component {
     state = {
         isLittleIcon: true,
         loading: false,
-        count: 20
+        count: 20,
     }
 
     componentDidMount() {
@@ -30,7 +30,7 @@ export default class Films extends React.Component {
             const fastScroll = document.getElementsByClassName('fast-scroll')[0]
             const wideSearch = document.getElementsByClassName('wide-search')[0]
 
-            if (window.pageYOffset < 600) {
+            if (window.pageYOffset < 400) {
                 fastScroll.style.display = "none"
                 wideSearch.style.opacity = "0"
             } else {
@@ -48,6 +48,21 @@ export default class Films extends React.Component {
     loading = () => {
         this.setState({ loading: true })
         setTimeout(() => { this.setState({ count: this.state.count + 20 }) }, 500)
+    }
+
+    setLikes = (id, like) => {
+        let likesFilm = [];
+        if (localStorage.getItem('likes')) {
+            likesFilm = localStorage.getItem('likes').split(',')
+        }
+
+        if (like) {
+            likesFilm.push(id)
+        } else {
+            likesFilm.splice(likesFilm.indexOf(id), 1)
+        }
+
+        localStorage.setItem("likes", likesFilm)
     }
 
     render() {
@@ -72,6 +87,7 @@ export default class Films extends React.Component {
                 <FilmsList
                     isLittleIcon={this.state.isLittleIcon}
                     count={this.state.count}
+                    setLikes={this.setLikes}
                 />
                 <Center>
                     {this.state.loading ? <Loading /> : <Button

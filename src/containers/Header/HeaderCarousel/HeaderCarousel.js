@@ -26,8 +26,6 @@ export default class HeaderCarousel extends React.Component {
         if (this.state.shift <= visibleList - widthList) {
             this.setState({ shift: 0 })
         }
-        // slider.scrollLeft = -this.state.shift
-        console.log(this.state.shift);
     }
 
 
@@ -49,28 +47,26 @@ export default class HeaderCarousel extends React.Component {
         let startX;
         let scrollLeft;
 
-        slider.addEventListener('mousedown', (e) => {
+        slider.addEventListener('touchstart', (e) => {
             isDown = true;
-            startX = e.pageX - slider.offsetLeft;
+            startX = e.changedTouches[0].pageX - slider.offsetLeft;
             scrollLeft = slider.scrollLeft;
-
         });
 
-        slider.addEventListener('mouseleave', () => {
+        slider.addEventListener('pointerleave', () => {
             isDown = false;
         });
 
-        slider.addEventListener('mouseup', () => {
+        slider.addEventListener('pointerup', () => {
             isDown = false;
         });
 
-        slider.addEventListener('mousemove', (e) => {
+        slider.addEventListener('touchmove', (e) => {
             if (!isDown) return;
             e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
+            const x = e.changedTouches[0].pageX - slider.offsetLeft;
             const walk = (x - startX) * 1; //scroll-fast
             slider.scrollLeft = scrollLeft - walk;
-            console.log(slider.scrollLeft);
         });
     }
 

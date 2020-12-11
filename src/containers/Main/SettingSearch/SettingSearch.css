@@ -1,6 +1,8 @@
 .setting-search {
 	width: 350px;
+	transition: all .3s ease ;
 }
+.setting-search .button,
 .setting-search button{
 	border-radius: 5px;
 	padding: 10px;
@@ -25,12 +27,15 @@
 .two-col .setting-item{
 	margin: 10px;
 }
-.two-col button:nth-child(1){
+.two-col a{
+	width: 100%;
+}
+.two-col .button:nth-child(1){
+	width: 90%;
 	color: #fff;
 	background: linear-gradient(90deg, #8408cd 0%, #527eb3 100% );
 }
-.two-col button:nth-child(2){
-	/* height: 20px; */
+.two-col .button:nth-child(2){
 	color: #000;
 	background: #F6BB10;
 }
@@ -75,6 +80,12 @@ select.setting-item{
 	border: 1px solid #adb5bd;
 	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
   }
+/* .setting-search option{
+	padding: 5px 0;
+}
+.setting-search option:hover{
+	background-color: #527eb3;
+} */
 
 .alphabet{
 	  margin: 15px;
@@ -129,15 +140,14 @@ select.setting-item{
 @media screen and (max-width: 991px) {
     .setting-search{
 		position: fixed;
-		display: none;
-		top: 190px;
-		right: 0;
+		top: 120px;
+		right: -500px;
 		z-index: 5;
 		background-color: rgba(0, 0, 0, 0.9);
 		border-radius: 10px;
 	}
 	.setting-search.show{
-		display: block;
+		right: 0;
 	}
 	.setting-search .alphabet,
 	.setting-search .new-films,

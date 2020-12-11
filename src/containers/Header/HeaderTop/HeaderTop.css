@@ -57,22 +57,39 @@
 		height: 140px;
 		position: fixed;
 		width: 100%;
-		z-index: 10000;
+		z-index: 10002;
+		transition: all .5s ease;
+		top: -140px;
 	}
 	.search{
 		margin-top: 2px;
 		width: 70%;
 		order: 10;
 	}
+	.header-top.visible{
+		top: 0;
+	}
+	.header-top .logo {
+		position: fixed;
+		top: -15px;
+		left: 20px;
+		transition: .5s ease;
+	}
+	.header-top.visible .logo {
+		position: relative;
+		top: 0;
+		left: 0;
+	}
 }
 /* Iphone 5 */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 340px) {
     .header-top{
 		height: 120px;
+		top: -120px;
 	}
 	.search{
 		width: 80%;
-		/* margin-top: 20px; */
+		/* margin-top: 20px; */ 
 	}
 	.auth{
 		display: none;

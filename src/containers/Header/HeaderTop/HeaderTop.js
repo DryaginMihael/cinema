@@ -1,16 +1,23 @@
 import React from 'react'
 import './HeaderTop.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
-export default class HeaderTop extends React.Component {
+class HeaderTop extends React.Component {
 
     state = {
         searchValue: ""
     }
 
+    searchStart = (e) => {
+        if (e.code === 'Enter') {
+            console.log(this.props);
+            this.props.history.push(`/${this.state.searchValue}`)
+        };
+    }
+
     render() {
         return (
-            <div className="header-top">
+            <div className={"header-top" + (this.props.visible ? " visible" : "")}>
 
                 <div className="logo">
                     <h1>KINO</h1>
@@ -22,6 +29,7 @@ export default class HeaderTop extends React.Component {
                         placeholder="Введите название"
                         name="search"
                         id="search"
+                        onKeyDown={(e) => this.searchStart(e)}
                     />
                     <NavLink to={'/' + this.state.searchValue}>
                         <button>
@@ -48,3 +56,5 @@ export default class HeaderTop extends React.Component {
     }
 
 }
+
+export default withRouter(HeaderTop)

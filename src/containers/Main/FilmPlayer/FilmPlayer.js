@@ -50,6 +50,8 @@ class FilmPlayer extends React.Component {
 
     render() {
 
+        localStorage.setItem('lastFilm', this.props.id_kinopoisk)
+
         const frames = (<div className="frames">
             <h2>Кадры:</h2>
             <div className="activeimg">

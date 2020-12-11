@@ -8,6 +8,7 @@ export default class InputRange extends React.Component {
 
     changeHandler = (event) => {
         this.setState({ value: event.target.value })
+        this.props.onChangeHandler({ [event.target.name]: event.target.value })
     }
 
     createStars = () => {
@@ -35,7 +36,7 @@ export default class InputRange extends React.Component {
                 <br />
                 <input
                     onChange={this.changeHandler}
-                    name="name"
+                    name={this.props.name}
                     className="custom-range"
                     type="range"
                     step="1"

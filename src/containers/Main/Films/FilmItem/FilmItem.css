@@ -44,8 +44,8 @@ a{
 	display: none;
 }
 .film .preview:hover {
-	transform: translateY(-5px);
 }
+
 .film .preview:hover::before,
 .film .preview:focus::before {
 	content: "";
@@ -79,36 +79,43 @@ a{
   cursor: pointer;
 }
 
-.film .quality{
+.film .imdb{
 	position: absolute;
-	top: 5px;
+	top: 35px;
 	left: 5px;
-   	width: 45px;
+   	width: 53px;
 	font-size: 13px;
 	padding: 5px;
 	background-color:  #8408cd;
 	border-radius: 3px;
 	opacity: .9;
 }
-.film .translate{
+.film .kp{
 	position: absolute;
-	top: 35px;
+	top: 5px;
 	left: 5px;
-  	width: 45px;
+  	width: 53px;
 	font-size: 13px;
 	padding: 5px;
 	background-color:  #F6BB10;
 	border-radius: 3px;
 	color: #000;
 	opacity: .9;
+	
 }
 .film .rate{
 	position: absolute;
-	right: 5px;
+	right: 10px;
 	top: 10px;
-	color: #F6BB10;
+	color: #fff;
+	font-size: 20px;
 	text-shadow: 1.5px 1.5px 1px #000;
 	font-weight: 900;
+	z-index: 5;
+}
+.film .rate:hover {
+	color:#FF1E48;
+	transform: scale(1.2);
 }
 .film .name{
 	position: absolute;

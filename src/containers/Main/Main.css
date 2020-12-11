@@ -9,7 +9,7 @@ main .container{
 
 .wide-search{
 	position: fixed;
-	top: 150px;
+	top: 80px;
 	right: -140px;
 	border-radius: 0;
 	border-top-left-radius: 25px;

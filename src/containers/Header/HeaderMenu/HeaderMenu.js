@@ -9,12 +9,17 @@ export default class HeaderMenu extends React.Component {
     }
 
     showMenu = () => {
+
         this.setState({ visible: !this.state.visible })
+        this.props.setVisible(!this.state.visible)
     }
 
     render() {
         return (
-            <nav className={this.state.visible ? "header-menu visible" : "header-menu"} >
+            <nav
+                onClick={this.showMenu}
+                className={this.state.visible ? "header-menu visible" : "header-menu"}
+            >
                 <ul>
                     <li className="burger" onClick={this.showMenu}><i className="fas fa-align-justify"></i></li>
 
@@ -24,8 +29,8 @@ export default class HeaderMenu extends React.Component {
                     <NavLink to="/films"><li><i className="fas fa-film"></i> Фильмы</li></NavLink>
                     <NavLink to="/popular"><li><i className="far fa-star"></i> Популярные категории</li></NavLink>
                     <NavLink to="/top"><li><i className="fas fa-trophy"></i> Топы</li></NavLink>
-                    <NavLink to="/pause"><li>Вы остановились на <i className="far fa-pause-circle"></i></li></NavLink>
-                    <NavLink to="/"><li><i className="far fa-heart"></i> Закладки</li></NavLink>
+                    <a href={"/player/" + localStorage.lastFilm}><li>Вы остановились на <i className="far fa-pause-circle"></i></li></a>
+                    <NavLink to="/likes"><li><i className="far fa-heart"></i> Любимые</li></NavLink>
                 </ul>
             </nav>
         )

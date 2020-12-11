@@ -20,6 +20,7 @@
 }
 .carousel li.film{
 	margin: 0;
+	margin-right: 20px;
 	padding: 0;
 	display: inline-block;
 	box-sizing: border-box;
@@ -92,7 +93,7 @@
 /* Landscape phones and portrait tablets */
 @media screen and (max-width: 767px) {
 	.carousel{
-		margin-top: 180px;
+		margin-top: 90px;
 	}
 	.carousel-contain{
         width: 490px;

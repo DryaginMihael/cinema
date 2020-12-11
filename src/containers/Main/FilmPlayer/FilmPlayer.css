@@ -1,5 +1,5 @@
 .film-block{
-    margin: 0 20px;
+    margin: 0 120px;
 }
 .frames{
     margin: 0 auto;
@@ -79,6 +79,13 @@
 .comments-list .comment-body{
     display: inline-block;
     width: 70%;
+}
+
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 991px) {
+    .film-block{
+        margin: 0 20px;
+    }
 }
 
 /* Landscape phones and portrait tablets */

@@ -32,9 +32,11 @@
 .burger{
 	display: none;
 	font-size: 20px;
+	transition: all .5s ease;
 }
 .header-menu li.burger i {
 	color: #fff;
+	transition: all .5s ease;
 }
 
 @media screen and (max-width: 991px) {
@@ -63,10 +65,21 @@
 }
 @media screen and (max-width: 767px){
 	.header-menu{
-		top: 88px;
-		position: fixed;
+		top: 0px;
+		position: fixed; 
 		z-index: 10001; 
 		width: 100%;
+	}
+	.header-menu li.burger{
+		text-align: right;
+	}
+	.header-menu li.burger i{
+		margin-right: 20px;
+		margin-left: auto;
+	}
+	.header-menu.visible li.burger i{
+		display: inline-block;
+		margin-right: calc(50% - 10px);
 	}
 	.header-menu li{
 		background-color: #1a191e;
@@ -74,10 +87,10 @@
 
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 340px) {
     .header-menu{
 		padding-top: 0px;
-		top: 68px;
+		/* top: 68px; */
 	}
 	.header-menu.visible{
 		top: 119px;
