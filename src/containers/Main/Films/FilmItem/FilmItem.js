@@ -1,6 +1,5 @@
 import React from 'react'
 import './FilmItem.css'
-import { NavLink } from 'react-router-dom'
 
 export default class FilmItem extends React.Component {
 
@@ -15,7 +14,6 @@ export default class FilmItem extends React.Component {
         const newLikeValue = !this.state.like
         this.setState({ like: newLikeValue })
         this.props.setLikes(id, newLikeValue);
-        console.log(localStorage);
     }
 
     componentDidMount() {
@@ -29,22 +27,31 @@ export default class FilmItem extends React.Component {
             <div className="short-info">
                 <h2>{this.props.film.title}</h2>
                 <table>
-                    <tr>
-                        <td className="first-column">Режисер</td>
-                        <td>{Array.isArray(this.props.film.directors) ? this.props.film.directors.join(", ") : "-"}</td>
-                    </tr>
-                    <tr>
-                        <td className="first-column">Год</td>
-                        <td>{this.props.film.year}</td>
-                    </tr>
-                    <tr>
-                        <td className="first-column">Жанр</td>
-                        <td>{Array.isArray(this.props.film.genres) ? this.props.film.genres.join(", ") : "-"}</td>
-                    </tr>
-                    <tr>
-                        <td className="first-column">Краткое описание</td>
-                        <td>{this.props.film.description}</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td className="first-column">Режисер</td>
+                            <td>{Array.isArray(this.props.film.directors) ? this.props.film.directors.join(", ") : "-"}</td>
+                        </tr>
+                        <tr>
+                            <td className="first-column">Год</td>
+                            <td>{this.props.film.year ? this.props.film.year : "-"}</td>
+                        </tr>
+                        <tr>
+                            <td className="first-column">Жанр</td>
+                            <td>{Array.isArray(this.props.film.genres) ? this.props.film.genres.join(", ") : "-"}</td>
+                        </tr>
+                        <tr>
+                            <td className="first-column">Страна</td>
+                            <td>{Array.isArray(this.props.film.countries) ? this.props.film.countries.join(", ") : "-"}</td>
+                        </tr>
+                        {this.props.film.description ?
+                            <tr>
+                                <td className="first-column">Краткое описание</td>
+                                <td>{this.props.film.description}</td>
+                            </tr> : null
+                        }
+
+                    </tbody>
                 </table>
             </div>
         )

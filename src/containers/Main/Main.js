@@ -1,9 +1,7 @@
 import React from 'react'
 import './Main.css'
-import Add from './Add/Add'
 import Films from './Films/Films'
 import SettingSearch from './SettingSearch/SettingSearch'
-import Trailer from './Trailer/Trailer'
 import FilmPlayer from './FilmPlayer/FilmPlayer'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import Container from '../../components/Align/Container/Container'
@@ -29,8 +27,6 @@ class Main extends React.Component {
         return (
             <main>
                 <Container >
-                    {/* <Add /> */}
-                    {/* <Trailer /> */}
                     <div className="sidebars">
                         {routes}
 

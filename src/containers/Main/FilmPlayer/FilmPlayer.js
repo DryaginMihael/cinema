@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import Button from '../../../components/UI/Button/Button';
+// import Button from '../../../components/UI/Button/Button';
 import { fetchPlayer } from '../../../store/actions/player';
 import './FilmPlayer.css'
 
@@ -60,9 +60,10 @@ class FilmPlayer extends React.Component {
             <ul className="frames-carousel" style={{
                 transform: `translateX(${this.state.carouselShift}px)`
             }}>
-                {this.props.frames.map((frame) => {
+                {this.props.frames.map((frame, index) => {
                     return (
                         <li
+                            key={`frame${index}`}
                             onClick={(evt) => this.activeFrameHandler(evt, frame)}
                         >
                             <img src={frame} alt="" height="60px"></img>
@@ -72,32 +73,32 @@ class FilmPlayer extends React.Component {
             </ul>
         </div>)
 
-        const comments = this.props.comments.map((comment) => {
-            return (
-                <li className="comment">
-                    <div className="comment-img">
-                        <img src={comment.img} alt=""></img>
-                    </div>
-                    <div className="comment-body">
-                        <h4 className="comment-author">{comment.author}</h4>
-                        <p className="comment-text">{comment.text}</p>
-                    </div>
-                </li>
-            )
-        })
+        // const comments = this.props.comments.map((comment) => {
+        //     return (
+        //         <li className="comment">
+        //             <div className="comment-img">
+        //                 <img src={comment.img} alt=""></img>
+        //             </div>
+        //             <div className="comment-body">
+        //                 <h4 className="comment-author">{comment.author}</h4>
+        //                 <p className="comment-text">{comment.text}</p>
+        //             </div>
+        //         </li>
+        //     )
+        // })
 
-        const createComment = (
-            <li className="comment">
-                <div className="comment-img">
-                    <img src={this.props.currentUser.img} alt=""></img>
-                </div>
-                <div className="comment-body">
-                    <h4 className="comment-author">{this.props.currentUser.author}</h4>
-                    <textarea></textarea>
-                </div>
-                <Button classesButton={["dark"]}>Отправить</Button>
-            </li>
-        )
+        // const createComment = (
+        //     <li className="comment">
+        //         <div className="comment-img">
+        //             <img src={this.props.currentUser.img} alt=""></img>
+        //         </div>
+        //         <div className="comment-body">
+        //             <h4 className="comment-author">{this.props.currentUser.author}</h4>
+        //             <textarea></textarea>
+        //         </div>
+        //         <Button classesButton={["dark"]}>Отправить</Button>
+        //     </li>
+        // )
 
         return (
             <div className="film-block">
@@ -107,25 +108,38 @@ class FilmPlayer extends React.Component {
                         <img src={this.props.poster} alt="" width="200px"></img>
                     </div>
                     <div className="info">
-                        <h2>{this.props.title}</h2>
+                        <h2>{this.props.title ? this.props.title : "Упс, описание не найдено!"}</h2>
                         <table>
-                            <tr>
-                                <td className="first-column">Режжисер</td>
-                                <td>{this.props.directors.join(" ")}</td>
-                            </tr>
-                            <tr>
-                                <td className="first-column">Актеры</td>
-                                <td>{this.props.actors.join(", ")}</td>
-                            </tr>
-                            <tr>
-                                <td className="first-column">Страны</td>
-                                <td>{this.props.countries.join(' ')}</td>
-                            </tr>
+                            <tbody>
+                                {this.props.directors.length !== 0 ?
+                                    <tr>
+                                        <td className="first-column">Режжисер</td>
+                                        <td>{this.props.directors.join(" ")}</td>
+                                    </tr> : null
+                                }
+                                {
+                                    this.props.actors.length !== 0 ?
+                                        <tr>
+                                            <td className="first-column">Актеры</td>
+                                            <td>{this.props.actors.join(", ")}</td>
+                                        </tr> : null
+                                }
+                                {
+                                    this.props.countries.length !== 0 ?
+                                        <tr>
+                                            <td className="first-column">Страны</td>
+                                            <td>{this.props.countries.join(' ')}</td>
+                                        </tr> : null
+                                }
+                                {
+                                    this.props.rating_kinopoisk ? <tr>
+                                        <td className="first-column">Рейтинг КиноПоиск</td>
+                                        <td>{this.props.rating_kinopoisk}</td>
+                                    </tr> : null
+                                }
 
-                            <tr>
-                                <td className="first-column">Рейтинг КиноПоиск</td>
-                                <td>{this.props.rating_kinopoisk}</td>
-                            </tr>
+
+                            </tbody>
                         </table>
                     </div>
                 </div>

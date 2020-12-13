@@ -4,9 +4,11 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
 
     return async dispatch => {
 
+        console.log(settingSearch);
+
         let url = '/Data/films.json'
 
-        if (filtr === "tv-series") {
+        if (filtr === "tv-series" || settingSearch.serials) {
             url = '/Data/tv-series.json'
         }
         const keyFiltr = filtr
@@ -24,8 +26,9 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
             let arr = []
 
             function checkYear(filmYear, settingYear) {
-                console.log(settingYear);
                 switch (settingYear) {
+                    case 'year':
+                        return true
                     case 'до 2000':
                         return filmYear < 2000
                     case '2010-2015':
@@ -33,24 +36,30 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
                     case '2000-2009':
                         return filmYear >= 2000 && filmYear <= 2009
                     default:
-                        if (settingYear === "year" || settingYear === "") {
-                            return true
-                        }
                         return filmYear === +settingYear
                 }
             }
+
+            const likesFilm = localStorage.getItem('likes')?.split(',');
 
             function condition(film, filmNum) {
                 switch (filtr) {
                     case "all":
                         return film.poster && filmNum <= count;
+                    case "popular":
+                        return film.poster && filmNum <= count;
                     case "likes":
-                        return film.poster && localStorage.getItem('likes')?.split(',').includes(film.id_kinopoisk);
+                        return film.poster && likesFilm.includes(film.id_kinopoisk);
                     case "widesearch":
-                        console.log(settingSearch);
                         return film.poster
                             && checkYear(film.year, settingSearch.year)
-                            && (settingSearch.genr === "" || settingSearch.genr === "Жанр" ? true : Boolean(~film.genres?.indexOf(settingSearch.genr)));
+                            && (settingSearch.genr === "genr" ? true : film.genres?.includes(settingSearch.genr))
+                            && (settingSearch.mult ? film.genres?.includes("Мультфильм") : true)
+                            && (settingSearch.anime ? film.genres?.includes("Аниме") : true)
+                            && (settingSearch.country === "country" ? true : film.countries?.includes(settingSearch.country))
+                            && (settingSearch.kp <= film.rating_kinopoisk)
+                            && (film.rating_imdb ? settingSearch.imdb <= film.rating_imdb : true)
+
                     default:
                         if (filtr) {
                             return film.poster && film.title.toLowerCase().indexOf(filtr.toLowerCase()) !== -1
@@ -62,7 +71,7 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
             Object.keys(films).forEach((filmNum) => {
                 const film = films[filmNum]
                 if (condition(film, filmNum)) {
-                    arr.push({ key: `${keyFiltr} ${filmNum}`, film: film, isLittleIcon: isLittleIcon, like: localStorage.getItem('likes')?.split(',').includes(film.id_kinopoisk) })
+                    arr.push({ key: `${keyFiltr} ${filmNum}`, film: film, isLittleIcon: isLittleIcon, like: likesFilm.includes(film.id_kinopoisk) })
                 }
             })
 
@@ -78,7 +87,12 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
                     }
                 }).forEach((film, filmNum) => {
                     if (condition(film, filmNum)) {
-                        arr.push({ key: `${keyFiltr} ${filmNum}`, film: film, isLittleIcon: isLittleIcon })
+                        arr.push({
+                            key: `${keyFiltr} ${filmNum}`,
+                            film: film,
+                            isLittleIcon: isLittleIcon,
+                            like: likesFilm.includes(film.id_kinopoisk)
+                        })
                     }
                 })
             }

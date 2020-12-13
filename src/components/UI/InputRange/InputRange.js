@@ -2,12 +2,8 @@ import React from 'react'
 import './InputRange.css'
 
 export default class InputRange extends React.Component {
-    state = {
-        value: 7
-    }
 
     changeHandler = (event) => {
-        this.setState({ value: event.target.value })
         this.props.onChangeHandler({ [event.target.name]: event.target.value })
     }
 
@@ -16,11 +12,11 @@ export default class InputRange extends React.Component {
 
         for (let i = 1; i <= 10; i++) {
             let classes = ['far', 'fa-star']
-            if (i <= this.state.value) {
+            if (i <= this.props.value) {
                 classes.push('star-active')
             }
 
-            stars.push((<i className={classes.join(' ')}></i>))
+            stars.push((<i key={`star${i}`} className={classes.join(' ')}></i>))
         }
         return (stars)
     }
@@ -32,7 +28,7 @@ export default class InputRange extends React.Component {
                 htmlFor={this.props.id}
             >
                 {this.props.children}
-                <div className="stars">{this.state.value} {this.createStars()} </div>
+                <div className="stars">{this.props.value} {this.createStars()} </div>
                 <br />
                 <input
                     onChange={this.changeHandler}
@@ -42,11 +38,10 @@ export default class InputRange extends React.Component {
                     step="1"
                     min="0"
                     max="10"
-                    value={this.state.value}
+                    value={this.props.value}
                     id={this.props.id}
                 ></input>
             </label>
         )
     }
-
 }

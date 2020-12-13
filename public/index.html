@@ -3,11 +3,10 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="icon" href="%PUBLIC_URL%/movie.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -46,10 +45,17 @@
     }
 
     // if (document.getElementById("uitools")) {
+    var dataTitle = ""
+    var src = ""
     let kp_id = window.location.pathname.replace("/player/", "");
-    var dataTitle = "{}";
+    if (isNaN(+kp_id)) {
+      dataTitle = kp_id;
+      src = "//pleer.uitools.space/get_player?w=" + widthPlayer + "&h=" + heightPlayer + "&type=widget&name=" + dataTitle + "&players=apicollaps,videocdn,iframe,trailer&ani=COLLAPS&ati=&adi=&vni=VIDEOCDN&vti=&vdi=&idi=&data_title={" + dataTitle + "}";
+    } else {
+      src = "//pleer.uitools.space/get_player?w=" + widthPlayer + "&h=" + heightPlayer + "&type=widget&kp_id=" + kp_id + "&name=&players=apicollaps,videocdn,trailer&ani=COLLAPS&ati=&adi=&vni=VIDEOCDN&usti=&usdi=&data_title={}"
+    }
     var my_script_play = document.createElement("script");
-    my_script_play.setAttribute("src", "//pleer.uitools.space/get_player?w=" + widthPlayer + "&h=" + heightPlayer + "&type=widget&kp_id=" + kp_id + "&name=&players=apicollaps,videocdn,trailer&ani=COLLAPS&ati=&adi=&vni=VIDEOCDN&usti=&usdi=&data_title=" + dataTitle);
+    my_script_play.setAttribute("src", src);
     my_script_play.async = true;
     document.head.appendChild(my_script_play);
     // }

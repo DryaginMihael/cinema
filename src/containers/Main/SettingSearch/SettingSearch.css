@@ -102,6 +102,7 @@ select.setting-item{
 	background-color: #141414;
 	border-radius: 3px;
 	cursor: pointer;
+	box-sizing: border-box;
 }  
 .alphabet li{
 	text-align: center;

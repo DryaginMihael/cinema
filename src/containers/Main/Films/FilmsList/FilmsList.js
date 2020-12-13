@@ -50,7 +50,10 @@ function mapStateToProps(state) {
             year: state.wideSearch.year,
             country: state.wideSearch.country,
             quality: state.wideSearch.quality,
-            genr: state.wideSearch.genr
+            genr: state.wideSearch.genr,
+            kp: state.wideSearch.kp,
+            imdb: state.wideSearch.imdb,
+            char: state.wideSearch.char
         }
     }
 }
