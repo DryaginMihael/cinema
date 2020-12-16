@@ -52,26 +52,29 @@ class FilmPlayer extends React.Component {
 
         localStorage.setItem('lastFilm', this.props.id_kinopoisk)
 
-        const frames = (<div className="frames">
-            <h2>Кадры:</h2>
-            <div className="activeimg">
-                <img src={this.state.activeFrame || this.props.activeFrame} alt="" height="400px" ></img>
-            </div>
-            <ul className="frames-carousel" style={{
-                transform: `translateX(${this.state.carouselShift}px)`
-            }}>
-                {this.props.frames.map((frame, index) => {
-                    return (
-                        <li
-                            key={`frame${index}`}
-                            onClick={(evt) => this.activeFrameHandler(evt, frame)}
-                        >
-                            <img src={frame} alt="" height="60px"></img>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>)
+        const frames = (
+            this.props.frames && this.props.frames.length !== 0 ? (
+                <div className="frames">
+                    <h2>Кадры:</h2>
+                    <div className="activeimg">
+                        <img src={this.state.activeFrame || this.props.activeFrame} alt="" height="400px" ></img>
+                    </div>
+                    <ul className="frames-carousel" style={{
+                        transform: `translateX(${this.state.carouselShift}px)`
+                    }}>
+                        {this.props.frames.map((frame, index) => {
+                            return (
+                                <li
+                                    key={`frame${index}`}
+                                    onClick={(evt) => this.activeFrameHandler(evt, frame)}
+                                >
+                                    <img src={frame} alt="" height="60px"></img>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>) : null
+        )
 
         // const comments = this.props.comments.map((comment) => {
         //     return (
@@ -108,7 +111,7 @@ class FilmPlayer extends React.Component {
                         <img src={this.props.poster} alt="" width="200px"></img>
                     </div>
                     <div className="info">
-                        <h2>{this.props.title ? this.props.title : "Упс, описание не найдено!"}</h2>
+                        <h2>{this.props.title || "Упс, описание не найдено!"}</h2>
                         <table>
                             <tbody>
                                 {this.props.directors.length !== 0 ?
@@ -128,7 +131,14 @@ class FilmPlayer extends React.Component {
                                     this.props.countries.length !== 0 ?
                                         <tr>
                                             <td className="first-column">Страны</td>
-                                            <td>{this.props.countries.join(' ')}</td>
+                                            <td>{this.props.countries.join(', ')}</td>
+                                        </tr> : null
+                                }
+                                {
+                                    this.props.genres.length !== 0 ?
+                                        <tr>
+                                            <td className="first-column">Жанры</td>
+                                            <td>{this.props.genres.join(', ')}</td>
                                         </tr> : null
                                 }
                                 {
@@ -149,7 +159,9 @@ class FilmPlayer extends React.Component {
 
                 <h2>Смотреть онлайн</h2>
 
-                <div className="uitools" id="uitools"></div>
+                <div className="uitools" id="uitools">
+                    Загрузка плеера...
+                </div>
 
                 {frames}
 
@@ -172,7 +184,7 @@ function mapStateToProps(state) {
         directors: state.player.directors,
         actors: state.player.actors,
         countries: state.player.countries,
-        generes: state.player.generes,
+        genres: state.player.genres,
 
         frames: state.player.frames,
         activeFrame: state.player.activeFrame,

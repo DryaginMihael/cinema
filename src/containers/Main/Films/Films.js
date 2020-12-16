@@ -4,8 +4,10 @@ import './Films.css'
 import Loading from '../../../components/UI/Loader/Loader'
 import Button from '../../../components/UI/Button/Button'
 import Center from '../../../components/Align/Center/Center'
+import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default class Films extends React.Component {
+class Films extends React.Component {
 
     state = {
         isLittleIcon: true,
@@ -50,52 +52,91 @@ export default class Films extends React.Component {
         setTimeout(() => { this.setState({ count: this.state.count + 20 }) }, 500)
     }
 
-    setLikes = (id, like) => {
-        let likesFilm = [];
-        if (localStorage.getItem('likes')) {
-            likesFilm = localStorage.getItem('likes').split(',')
-        }
-
-        if (like) {
-            likesFilm.push(id)
-        } else {
-            likesFilm.splice(likesFilm.indexOf(id), 1)
-        }
-
-        localStorage.setItem("likes", likesFilm)
+    resetCount = () => {
+        this.setState({ count: 20, loading: false })
     }
 
     render() {
+
+        const route = (
+            < Switch >
+                <Route path="/" exact render={() => (<h3>НОВЫЕ ФИЛЬМЫ И СЕРИАЛЫ</h3>)} />
+                <Route path="/top" render={() => (<h3>ТОП</h3>)} />
+                <Route path="/films" render={() => (<h3>ФИЛЬМЫ</h3>)} />
+                <Route path="/tv-series" render={() => (<h3>СЕРИАЛЫ</h3>)} />
+                <Route path="/popular" render={() => (<><h3>ПОПУЛЯРНЫЕ КАТЕГОРИИ</h3><p>(мелодрамы, комедии, боевики)</p></>)} />
+                <Route path="/likes" render={() => (<h3>ЛЮБИМЫЕ</h3>)} />
+                <Route path="/widesearch" render={() => (<><h3>РЕЗУЛЬТАТЫ ПОИСКА</h3><p>Найдено: {this.props.countFilms}</p></>)} />
+                <Route path="/search" render={() => (<><h3>РЕЗУЛЬТАТЫ ПОИСКА</h3><p>Найдено: {this.props.countFilms}</p></>)} />
+            </Switch >
+        )
+
+        const buttonLoader = (
+            this.props.isEnd ?
+                <p>На этом пока всё ;)</p> :
+                (this.state.loading ? <Loading /> :
+                    <Button
+                        classesButton={['dark']}
+                        clickHandler={() => this.loading()}
+                    >
+                        Показать ещё
+                    </Button>)
+        )
+
+        const routeButton = (
+            < Switch >
+                <Route path="/" exact render={() => buttonLoader} />
+                <Route path="/top" render={() => buttonLoader} />
+                <Route path="/films" render={() => buttonLoader} />
+                <Route path="/tv-series" render={() => buttonLoader} />
+            </Switch >
+        )
+
         return (
-            <section className="films">
+            <section className="films" >
                 <div className="toggle-location">
-                    <h3>НОВЫЕ ФИЛЬМЫ И СЕРИАЛЫ</h3>
-                    <i className={this.state.isLittleIcon ? "fas fa-th active" : "fas fa-th"} onClick={this.toggleHandler}></i>
-                    <i className={this.state.isLittleIcon ? "fas fa-align-justify" : "fas fa-align-justify active"} onClick={this.toggleHandler}></i>
+                    {route}
+                    <div className="toggle-icons">
+                        <i className={this.state.isLittleIcon ? "fas fa-th active" : "fas fa-th"} onClick={this.toggleHandler}></i>
+                        <i className={this.state.isLittleIcon ? "fas fa-align-justify" : "fas fa-align-justify active"} onClick={this.toggleHandler}></i>
+                    </div>
 
                     <div className="sort">
-                        Сортировать по
+                        {/* Сортировать по
                             <ul>
                             <li>дате</li>
                             <li>рейтингу</li>
                             <li>алфавиту</li>
                             <li>случайно</li>
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
 
                 <FilmsList
                     isLittleIcon={this.state.isLittleIcon}
                     count={this.state.count}
-                    setLikes={this.setLikes}
+                    resetCount={this.resetCount}
                 />
+
+
                 <Center>
-                    {this.state.loading ? <Loading /> : <Button
-                        classesButton={['dark']}
-                        clickHandler={() => this.loading()}
-                    >Показать ещё</Button>}
+                    {this.props.countFilms === 0 ?
+                        <p>Ничего не найдено :(</p> :
+                        routeButton
+                    }
                 </Center>
+
+
             </section>
         )
     }
 }
+
+const mapStateToProps = function (state) {
+    return {
+        countFilms: state.films.FilmsList.length,
+        isEnd: state.films.isEnd
+    }
+}
+
+export default connect(mapStateToProps)(Films)

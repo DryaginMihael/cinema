@@ -14,7 +14,7 @@ export default function filmsReducer(state = initialState, action) {
             return { ...state, error: action.error }
 
         case FETCH_FIND_FILMS_SUCCESS:
-            return { ...state, FilmsList: action.films }
+            return { ...state, FilmsList: action.films, isEnd: action.isEnd, randomId: action.randomId }
 
         default:
             return state

@@ -9,6 +9,9 @@ import FilmItem from '../FilmItem/FilmItem'
 class FilmsList extends React.Component {
 
     componentWillReceiveProps(nextProps) {
+        if (nextProps.match.params.filtr !== this.props.match.params.filtr) {
+            this.props.resetCount()
+        }
         if (nextProps.isLittleIcon !== this.props.isLittleIcon
             || nextProps.count !== this.props.count
             || nextProps.match.params.filtr !== this.props.match.params.filtr
@@ -18,7 +21,7 @@ class FilmsList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.drawFilms(this.props.isLittleIcon, this.props.count, this.props.match.params.filtr, this.props.SettingSearch)
+        this.props.drawFilms(this.props.isLittleIcon, this.props.count, this.props.match.params.filtr, this.props.SettingSearch);
     }
 
     render() {
@@ -26,7 +29,6 @@ class FilmsList extends React.Component {
             <ul className="films-list">
                 {this.props.FilmsList.map((film) => {
                     return (<FilmItem
-                        setLikes={this.props.setLikes}
                         key={film.key}
                         film={film.film}
                         isLittleIcon={film.isLittleIcon}

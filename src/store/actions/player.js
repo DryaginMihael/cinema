@@ -4,7 +4,7 @@ export function fetchPlayer() {
 
     return async dispatch => {
 
-        const kp_id = window.location.pathname.replace("/player/", "");
+        let kp_id = window.location.pathname.replace("/player/", "");
 
         const response = await fetch('/Data/films.json')
 
@@ -15,8 +15,7 @@ export function fetchPlayer() {
             const data = await response.json()
             const films = data.movies
 
-            Object.keys(films).forEach((filmNum) => {
-                const film = films[filmNum]
+            films.forEach((film) => {
                 if (film.id_kinopoisk === kp_id) {
                     const data = {
                         title: film.title,
@@ -26,11 +25,11 @@ export function fetchPlayer() {
                         rating_kinopoisk: film.rating_kinopoisk,
                         actors: film.actors,
                         countries: film.countries,
-                        generes: film.generes,
+                        genres: film.genres,
                         directors: film.directors,
                         frames: film.frames,
 
-                        activeFrame: film?.frames[0]
+                        activeFrame: film.frames ? film.frames[0] : ""
                     }
 
                     dispatch(fetchFindPlayerSuccess(data))

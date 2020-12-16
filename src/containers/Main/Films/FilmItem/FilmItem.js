@@ -13,7 +13,19 @@ export default class FilmItem extends React.Component {
 
         const newLikeValue = !this.state.like
         this.setState({ like: newLikeValue })
-        this.props.setLikes(id, newLikeValue);
+
+        let likesFilm = [];
+        if (localStorage.getItem('likes')) {
+            likesFilm = localStorage.getItem('likes').split(',')
+        }
+
+        if (newLikeValue) {
+            likesFilm.push(id)
+        } else {
+            likesFilm.splice(likesFilm.indexOf(id), 1)
+        }
+
+        localStorage.setItem("likes", likesFilm)
     }
 
     componentDidMount() {

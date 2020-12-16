@@ -13,11 +13,6 @@ class SettingSearch extends React.Component {
         active: null
     }
 
-    setFormState = (value) => {
-        console.log(value);
-        this.props.setFormState()
-    }
-
     render() {
 
         const arr_RU = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
@@ -28,11 +23,17 @@ class SettingSearch extends React.Component {
 
         return (
             <section className={this.props.showSetting ? "setting-search show" : "setting-search"}>
-                <form>
-                    <div className="shuffle-cont">
-                        <button className="shuffle"><i className="fas fa-random"></i> Случайный выбор</button>
-                    </div>
 
+                <div className="shuffle-cont">
+                    <a href={`/player/${this.props.randomId}`}>
+                        <button className="shuffle">
+                            <i className="fas fa-random"></i>
+                            Случайный выбор
+                            </button>
+                    </a>
+                </div>
+
+                <form>
                     <div className="two-col">
 
                         <NavLink to="/widesearch">
@@ -225,7 +226,8 @@ function mapStateToProps(state) {
         search: state.wideSearch.search,
         activeChar: state.wideSearch.activeChar,
         kp: state.wideSearch.kp,
-        imdb: state.wideSearch.imdb
+        imdb: state.wideSearch.imdb,
+        randomId: state.films.randomId
     }
 }
 

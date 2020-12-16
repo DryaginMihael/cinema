@@ -1,13 +1,14 @@
 import React from 'react'
 import './HeaderCarousel.css'
 import FilmItem from '../../Main/Films/FilmItem/FilmItem'
+import { connect } from 'react-redux'
+import { drawCarousel } from '../../../store/actions/carousel'
 
-export default class HeaderCarousel extends React.Component {
+class HeaderCarousel extends React.Component {
 
     state = {
         shift: 0,
         widthItem: 170,
-        FilmsList: null,
     }
 
     prevOnClick = () => {
@@ -18,8 +19,6 @@ export default class HeaderCarousel extends React.Component {
     }
 
     nextOnClick = () => {
-        // const slider = document.querySelector('.carousel-contain');
-
         const widthList = this.props.count * this.state.widthItem
         const visibleList = 6 * this.state.widthItem
         this.setState({ shift: this.state.shift - this.state.widthItem })
@@ -31,7 +30,7 @@ export default class HeaderCarousel extends React.Component {
 
     componentDidMount() {
 
-        this.drawFilms()
+        this.props.drawCarousel(this.props.count)
 
         setInterval(() => {
             const widthList = this.props.count * this.state.widthItem
@@ -70,36 +69,6 @@ export default class HeaderCarousel extends React.Component {
         });
     }
 
-    drawFilms = async () => {
-
-        // let response = await fetch('http://localhost:3000/movies')
-        const response = await fetch('/Data/films.json')
-
-        if (response.ok) {
-            // const films = await response.json()
-            const data = await response.json()
-            const films = data.movies
-
-            let arr = []
-
-            arr = Object.keys(films).map((filmNum) => {
-                const film = films[filmNum]
-                if (filmNum < this.props.count) {
-                    return (<FilmItem
-                        key={"carousel" + filmNum}
-                        film={film}
-                        isLittleIcon={true}
-                    />)
-                } else {
-                    return null
-                }
-            })
-            this.setState({ FilmsList: arr })
-        } else {
-            alert("Ошибка HTTP: " + response.status);
-        }
-    }
-
     render() {
 
         return (
@@ -117,11 +86,34 @@ export default class HeaderCarousel extends React.Component {
                             width: `${this.props.count * this.state.widthItem}px`
                         }}
                     >
-                        {this.state.FilmsList}
+                        {this.props.FilmsCarousel.map((film, index) => {
+                            return (index < this.props.count) ?
+                                (<FilmItem
+                                    setLikes={this.props.setLikes}
+                                    key={film.key}
+                                    film={film.film}
+                                    isLittleIcon={film.isLittleIcon}
+                                    like={film.like}
+                                />) :
+                                null
+                        })}
                     </ul>
                 </div>
             </div >
         )
     }
-
 }
+
+const mapStateToProps = (state) => {
+    return {
+        FilmsCarousel: state.carousel.FilmsCarousel
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        drawCarousel: (count) => dispatch(drawCarousel(count))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderCarousel)

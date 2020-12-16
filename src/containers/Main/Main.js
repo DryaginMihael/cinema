@@ -11,7 +11,9 @@ import Button from '../../components/UI/Button/Button'
 let routes = (
     <Switch>
         <Route path="/player" component={FilmPlayer} />
+        <Route path="/random" component={FilmPlayer} />
         <Route path="/:filtr" exact component={Films} />
+        <Route path="/search/:filtr" exact component={Films} />
         <Route path="/" exact component={Films} />
         <Redirect to="/" />
     </Switch>
@@ -21,13 +23,16 @@ class Main extends React.Component {
 
     state = {
         showSetting: false
-    } 
+    }
 
     render() {
         return (
             <main>
                 <Container >
-                    <div className="sidebars">
+                    <div
+                        className="sidebars"
+                        style={this.props.location.pathname.includes("player") ? { gridTemplateColumns: "1fr" } : null}
+                    >
                         {routes}
 
                         <Button
@@ -35,6 +40,7 @@ class Main extends React.Component {
                             classesButton={["dark", "button-hide", "wide-search"]}
                             classesIcon={this.state.showSetting ? ["fas fa-times"] : ["fas fa-search"]}
                         >Расширенный поиск</Button>
+
                         {this.props.location.pathname.includes("player") ?
                             null :
                             <SettingSearch showSetting={this.state.showSetting} />}

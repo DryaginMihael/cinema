@@ -29,11 +29,10 @@ export default class HeaderMenu extends React.Component {
                     <NavLink to="/films"><li><i className="fas fa-film"></i> Фильмы</li></NavLink>
                     <NavLink to="/popular"><li><i className="far fa-star"></i> Популярные категории</li></NavLink>
                     <NavLink to="/top"><li><i className="fas fa-trophy"></i> Топы</li></NavLink>
-                    <a href={"/player/" + localStorage.lastFilm}><li>Вы остановились на <i className="far fa-pause-circle"></i></li></a>
+                    <a href={"/player/" + (localStorage.lastFilm || "361")}><li>Вы остановились на <i className="far fa-pause-circle"></i></li></a>
                     <NavLink to="/likes"><li><i className="far fa-heart"></i> Любимые</li></NavLink>
                 </ul>
             </nav>
         )
     }
-
 }

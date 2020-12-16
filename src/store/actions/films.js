@@ -4,15 +4,15 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
 
     return async dispatch => {
 
-        console.log(settingSearch);
-
         let url = '/Data/films.json'
 
         if (filtr === "tv-series" || settingSearch.serials) {
             url = '/Data/tv-series.json'
         }
         const keyFiltr = filtr
-        if (filtr === 'films' || filtr === 'tv-series' || filtr === undefined || filtr === 'top') filtr = 'all'
+        if (filtr === 'films' || filtr === 'tv-series' || filtr === 'top') filtr = 'all';
+        if (filtr === undefined) filtr = 'new';
+        if (filtr === 'widesearch' || filtr === 'search') count = Infinity
 
         const response = await fetch(url)
 
@@ -24,6 +24,10 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
             const films = data.movies
 
             let arr = []
+
+            function isEnd(filmNum) {
+                return films.length <= +filmNum + 1
+            }
 
             function checkYear(filmYear, settingYear) {
                 switch (settingYear) {
@@ -45,11 +49,17 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
             function condition(film, filmNum) {
                 switch (filtr) {
                     case "all":
-                        return film.poster && filmNum <= count;
+                        return film.poster;
+                    case "new":
+                        return film.poster && film.year >= 2015 && film.year <= 2020;
                     case "popular":
-                        return film.poster && filmNum <= count;
+                        return film.poster
+                            && filmNum <= count
+                            && (film.genres?.includes("Комедия")
+                                || film.genres?.includes("Мелодрама")
+                                || film.genres?.includes("Боевик"));
                     case "likes":
-                        return film.poster && likesFilm.includes(film.id_kinopoisk);
+                        return film.poster && likesFilm?.includes(film.id_kinopoisk);
                     case "widesearch":
                         return film.poster
                             && checkYear(film.year, settingSearch.year)
@@ -64,19 +74,11 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
                         if (filtr) {
                             return film.poster && film.title.toLowerCase().indexOf(filtr.toLowerCase()) !== -1
                         }
-                        return film.poster && filmNum <= count;
+                        return film.poster;
                 }
             }
 
-            Object.keys(films).forEach((filmNum) => {
-                const film = films[filmNum]
-                if (condition(film, filmNum)) {
-                    arr.push({ key: `${keyFiltr} ${filmNum}`, film: film, isLittleIcon: isLittleIcon, like: likesFilm.includes(film.id_kinopoisk) })
-                }
-            })
-
             if (keyFiltr === 'top') {
-                arr = []
                 films.sort((a, b) => {
                     if (+a.rating_kinopoisk > +b.rating_kinopoisk) {
                         return -1
@@ -85,19 +87,28 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
                     } else {
                         return 0
                     }
-                }).forEach((film, filmNum) => {
-                    if (condition(film, filmNum)) {
-                        arr.push({
-                            key: `${keyFiltr} ${filmNum}`,
-                            film: film,
-                            isLittleIcon: isLittleIcon,
-                            like: likesFilm.includes(film.id_kinopoisk)
-                        })
-                    }
                 })
             }
 
-            dispatch(fetchFindFilmsSuccess(arr))
+
+            let countFilm = 0;
+
+            films.forEach((film, filmNum) => {
+                if (condition(film, filmNum) && ((filtr === 'widesearch') ? true : (count > countFilm))) {
+                    countFilm++
+                    arr.push({
+                        key: `${keyFiltr} ${filmNum}`,
+                        film: film,
+                        isLittleIcon: isLittleIcon,
+                        like: likesFilm?.includes(film.id_kinopoisk)
+                    })
+                }
+            })
+
+            const randomFilm = films[+(Math.random() * films.length).toFixed(0)];
+            const randomId = randomFilm.id_kinopoisk;
+
+            dispatch(fetchFindFilmsSuccess(arr, isEnd(count), randomId))
 
         } else {
 
@@ -107,10 +118,12 @@ export function drawFilms(isLittleIcon, count, filtr, settingSearch) {
     }
 }
 
-export function fetchFindFilmsSuccess(films) {
+export function fetchFindFilmsSuccess(films, isEnd, randomId) {
     return {
         type: FETCH_FIND_FILMS_SUCCESS,
-        films
+        films,
+        isEnd,
+        randomId
     }
 }
 

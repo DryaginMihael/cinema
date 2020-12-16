@@ -8,7 +8,7 @@ const initialState = {
     directors: [],
     actors: [],
     countries: [],
-    generes: [],
+    genres: [],
 
     frames: [],
     activeFrame: "",

@@ -21,10 +21,9 @@
 	text-align: center;
 }
 .header-menu li:hover{
-	background:  #141414;	
-	border-bottom: none;
+	background:  #141414;
 	cursor: pointer; 
-	
+	border-bottom: solid 5px #141414;
 }
 .header-menu li i{
 	color: #F6BB10;
@@ -50,6 +49,9 @@
 		padding: 10px 8px;
 		text-align: center;
 		border: none;
+	}
+	.header-menu li:hover{
+		border-bottom: none;
 	}
 	.burger{
 		display: block;

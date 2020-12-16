@@ -10,8 +10,7 @@ class HeaderTop extends React.Component {
 
     searchStart = (e) => {
         if (e.code === 'Enter') {
-            console.log(this.props);
-            this.props.history.push(`/${this.state.searchValue}`)
+            this.props.history.push(`/search/${this.state.searchValue}`)
         };
     }
 
@@ -31,7 +30,7 @@ class HeaderTop extends React.Component {
                         id="search"
                         onKeyDown={(e) => this.searchStart(e)}
                     />
-                    <NavLink to={'/' + this.state.searchValue}>
+                    <NavLink to={'/search/' + this.state.searchValue}>
                         <button>
                             <i className="fas fa-search"></i>
                         </button>

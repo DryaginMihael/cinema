@@ -3,11 +3,13 @@ main .container{
 }
 .sidebars {
 	margin-top: 50px;
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 1fr 350px;
+	/* display: flex;
+	justify-content: space-between; */
 }
 
-.wide-search{
+.wide-search{ 
 	position: fixed;
 	top: 80px;
 	right: -140px;
@@ -31,4 +33,10 @@ main .container{
 }
 .wide-search:hover{
 	right: 0px;
+}
+
+@media screen and (max-width: 991px){
+	.sidebars{
+		grid-template-columns: 1fr;
+	}
 }
